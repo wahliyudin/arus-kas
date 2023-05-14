@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    if (auth()->guard()) {
+        return view('layouts.master');
+    }
+    return to_route('home');
 });
 
 Auth::routes();
