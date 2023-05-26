@@ -255,6 +255,80 @@ var KTCustomersList = function () {
         }
     }
 
+    var handleDeleteRow = () => {
+        $('#akun_table').on('click', '.btn-delete', function () {
+            var akun = $(this).data('akun');
+            var target = this;
+            $(target).attr("data-kt-indicator", "on");
+            Swal.fire({
+                text: "Are you sure you want to delete ?",
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                confirmButtonText: "Yes, delete!",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: `/akun/${akun}/destroy`,
+                        dataType: "JSON",
+                        success: function (response) {
+                            $(target).removeAttr("data-kt-indicator");
+                            Swal.fire({
+                                text: "You have deleted !.",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            }).then(function () {
+                                datatable.ajax.reload();
+                            });
+                        },
+                        error: function (jqXHR) {
+                            if (jqXHR.status == 422) {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Peringatan!',
+                                    text: JSON.parse(jqXHR.responseText).message,
+                                }).then(function () {
+                                    $(target).removeAttr("data-kt-indicator");
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: jqXHR.responseText,
+                                }).then(function () {
+                                    $(target).removeAttr("data-kt-indicator");
+                                });
+                            }
+                        }
+                    });
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: "was not deleted.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    }).then(function () {
+                        $(target).removeAttr("data-kt-indicator");
+                    });
+                }
+            });
+
+        });
+    }
+
     // Public methods
     return {
         init: function () {
@@ -268,6 +342,7 @@ var KTCustomersList = function () {
             initToggleToolbar();
             handleSearchDatatable();
             handleDeleteRows();
+            handleDeleteRow();
             handleStatusFilter();
         }
     }

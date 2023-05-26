@@ -12,13 +12,20 @@
             Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
         </span>
     </button>
-    <button type="button" class="btn btn-sm btn-danger ps-4 btn-delete">
-        <i class="ki-duotone ki-trash fs-3">
-            <i class="path1"></i>
-            <i class="path2"></i>
-            <i class="path3"></i>
-            <i class="path4"></i>
-            <i class="path5"></i>
-        </i>Hapus
+    <button type="button" data-akun="{{ $akun->getKey() }}" class="btn btn-sm btn-danger ps-4 btn-delete">
+        <span class="indicator-label">
+            <div class="d-flex align-items-center gap-2">
+                <i class="ki-duotone ki-trash fs-3">
+                    <i class="path1"></i>
+                    <i class="path2"></i>
+                    <i class="path3"></i>
+                    <i class="path4"></i>
+                    <i class="path5"></i>
+                </i>Hapus
+            </div>
+        </span>
+        <span class="indicator-progress">
+            Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+        </span>
     </button>
 </div>

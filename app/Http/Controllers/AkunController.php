@@ -56,4 +56,16 @@ class AkunController extends Controller
             throw $th;
         }
     }
+
+    public function destroy(Akun $akun)
+    {
+        try {
+            $akun->delete();
+            return response()->json([
+                'message' => 'Berhasil dihapus'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }
