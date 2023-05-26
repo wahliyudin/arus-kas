@@ -72,6 +72,15 @@
                                 <span class="menu-title">Pemasok</span>
                             </a>
                         </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->routeIs('siswa.index') ? 'active' : '' }}"
+                                href="{{ route('siswa.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Siswa</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

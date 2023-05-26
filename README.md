@@ -18,6 +18,7 @@
 
 # Pelanggan
 
+    - nis
     - nama
     - no_hp
     - alamat

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\PemasokController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -38,3 +39,9 @@ Route::post('pemasok/list', [PemasokController::class, 'list'])->name('pemasok.l
 Route::post('pemasok/store', [PemasokController::class, 'store'])->name('pemasok.store');
 Route::post('pemasok/{pemasok}/edit', [PemasokController::class, 'edit'])->name('pemasok.edit');
 Route::delete('pemasok/{pemasok}/destroy', [PemasokController::class, 'destroy'])->name('pemasok.destroy');
+
+Route::get('siswa', [SiswaController::class, 'index'])->name('siswa.index');
+Route::post('siswa/list', [SiswaController::class, 'list'])->name('siswa.list');
+Route::post('siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
+Route::post('siswa/{siswa}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
+Route::delete('siswa/{siswa}/destroy', [SiswaController::class, 'destroy'])->name('siswa.destroy');
