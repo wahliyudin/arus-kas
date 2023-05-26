@@ -63,6 +63,15 @@
                                 <span class="menu-title">Akun</span>
                             </a>
                         </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->routeIs('pemasok.index') ? 'active' : '' }}"
+                                href="{{ route('pemasok.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Pemasok</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
