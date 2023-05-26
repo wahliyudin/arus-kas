@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode');
             $table->string('nama');
-            $table->string('klasifikasi');
-            $table->string('subklasifikasi');
+            $table->enum('jenis_akun', [1, 2, 3]);
             $table->timestamps();
         });
     }
