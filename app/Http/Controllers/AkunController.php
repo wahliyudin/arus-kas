@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\JenisAkun;
 use App\Models\Akun;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -67,5 +68,40 @@ class AkunController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    public function getNumber($value)
+    {
+        try {
+            return response()->json([
+                'kode' => $this->generateNumber($value)
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    private function generateNumber($val)
+    {
+        $jenisAkun = match ((int)$val) {
+            JenisAkun::AKTIVA_LANCAR->value => JenisAkun::AKTIVA_LANCAR,
+            JenisAkun::INVESTASI_JANGKA_PANJANG->value => JenisAkun::INVESTASI_JANGKA_PANJANG,
+            JenisAkun::AKTIVA_TETAP->value => JenisAkun::AKTIVA_TETAP,
+            JenisAkun::AKTIVA_TETAP_TIDAK_BERWUJUD->value => JenisAkun::AKTIVA_TETAP_TIDAK_BERWUJUD,
+            JenisAkun::KEWAJIBAN->value => JenisAkun::KEWAJIBAN,
+            JenisAkun::AKTIVA_LAIN_LAIN->value => JenisAkun::AKTIVA_LAIN_LAIN,
+            JenisAkun::KEWAJIBAN_JANGKA_PANJANG->value => JenisAkun::KEWAJIBAN_JANGKA_PANJANG,
+            JenisAkun::EKUITAS->value => JenisAkun::EKUITAS,
+            JenisAkun::PENDAPATAN->value => JenisAkun::PENDAPATAN,
+            JenisAkun::BEBAN->value => JenisAkun::BEBAN,
+            default => 0,
+        };
+        $akun = Akun::query()->where('jenis_akun', $jenisAkun)->latest()->first();
+        if ($akun) {
+            $currentKode = (int) substr($akun->kode, 2) + 1;
+        } else {
+            $currentKode = 1;
+        }
+        return (string)$jenisAkun->kode() . $currentKode;
     }
 }

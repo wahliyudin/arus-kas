@@ -150,8 +150,18 @@
                     </div>
                     <div class="modal-body py-10 px-lg-17">
                         <div class="fv-row mb-7">
+                            <label class="required fs-6 fw-semibold mb-2">Jenis Akun</label>
+                            <select class="form-select form-select-solid" name="jenis_akun" data-control="select2"
+                                data-placeholder="Jenis Akun" data-dropdown-parent="#create-akun">
+                                <option></option>
+                                @foreach (\App\Enums\JenisAkun::cases() as $jenisAkun)
+                                    <option value="{{ $jenisAkun->value }}">{{ $jenisAkun->label() }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="fv-row mb-7">
                             <label class="required fs-6 fw-semibold mb-2">Kode</label>
-                            <input type="text" class="form-control form-control-solid" placeholder="Kode"
+                            <input type="text" readonly class="form-control form-control-solid" placeholder="Kode"
                                 name="kode" />
                         </div>
                         <div class="fv-row mb-7">
@@ -159,16 +169,7 @@
                             <input type="text" class="form-control form-control-solid" placeholder="Nama"
                                 name="nama" />
                         </div>
-                        <div class="fv-row mb-7">
-                            <label class="required fs-6 fw-semibold mb-2">Jenis Akun</label>
-                            <select class="form-select form-select-solid" name="jenis_akun" data-control="select2"
-                                data-hide-search="true" data-placeholder="Jenis Akun">
-                                <option></option>
-                                <option value="1">Asset</option>
-                                <option value="2">Pendapatan</option>
-                                <option value="3">Beban</option>
-                            </select>
-                        </div>
+
                     </div>
                     <div class="modal-footer flex-center">
                         <button type="reset" id="create-akun_cancel" class="btn btn-light me-3">
@@ -193,4 +194,23 @@
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/pages/akun/index.js') }}"></script>
     <script src="{{ asset('assets/js/pages/akun/create.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('select[name="jenis_akun"]').change(function(e) {
+                e.preventDefault();
+                var jenisAkun = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: `/akun/${jenisAkun}/get-number`,
+                    dataType: "JSON",
+                    success: function(response) {
+                        $('input[name="kode"]').val(response.kode);
+                    },
+                    error: function() {
+
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

@@ -31,6 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('akun', [AkunController::class, 'index'])->name('akun.index');
 Route::post('akun/list', [AkunController::class, 'list'])->name('akun.list');
 Route::post('akun/store', [AkunController::class, 'store'])->name('akun.store');
+Route::post('akun/{value}/get-number', [AkunController::class, 'getNumber'])->name('akun.get-number');
 Route::post('akun/{akun}/edit', [AkunController::class, 'edit'])->name('akun.edit');
 Route::delete('akun/{akun}/destroy', [AkunController::class, 'destroy'])->name('akun.destroy');
 

@@ -16,7 +16,7 @@
     - no_hp
     - alamat
 
-# Pelanggan
+# Siswa
 
     - nis
     - nama
@@ -25,11 +25,24 @@
 
 # Penerimaan
 
-    - pelanggan_id
+    - siswa_id
     - tgl
     - nota
 
 # Detail Penerimaan
+
+    - layanan_id
+    - akun
+    - debet
+    - kredit
+
+# Pengeluaran
+
+    - siswa_id
+    - tgl
+    - nota
+
+# Detail Pengeluaran
 
     - layanan_id
     - jumlah

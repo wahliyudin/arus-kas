@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode');
             $table->string('nama');
-            $table->enum('jenis_akun', [1, 2, 3]);
+            $table->enum('jenis_akun', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
             $table->timestamps();
         });
     }
