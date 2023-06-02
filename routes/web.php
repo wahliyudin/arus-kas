@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('klasifikasi', [KlasifikasiController::class, 'index'])->name('klasifikasi.index');
+Route::post('klasifikasi/list', [KlasifikasiController::class, 'list'])->name('klasifikasi.list');
+Route::post('klasifikasi/store', [KlasifikasiController::class, 'store'])->name('klasifikasi.store');
+Route::post('klasifikasi/{klasifikasi}/edit', [KlasifikasiController::class, 'edit'])->name('klasifikasi.edit');
+Route::delete('klasifikasi/{klasifikasi}/destroy', [KlasifikasiController::class, 'destroy'])->name('klasifikasi.destroy');
 
 Route::get('akun', [AkunController::class, 'index'])->name('akun.index');
 Route::post('akun/list', [AkunController::class, 'list'])->name('akun.list');

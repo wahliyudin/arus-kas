@@ -1,16 +1,10 @@
-# Layanan
-
-    - Jenis Layanan
-    - akun_id
-    - biaya
-
 # Akun
 
     - kode
     - nama
     - jenis akun
 
-# Supplier
+# Pemasok
 
     - nama
     - no_hp
@@ -23,26 +17,17 @@
     - no_hp
     - alamat
 
-# Penerimaan
+# Transaksi
 
-    - siswa_id
-    - tgl
-    - nota
+    no
+    tgl
+    kode_siswa
+    kode_pemasok
+    dari
+    keterangan
 
-# Detail Penerimaan
+# Detail Transaksi
 
-    - layanan_id
-    - akun
-    - debet
-    - kredit
-
-# Pengeluaran
-
-    - siswa_id
-    - tgl
-    - nota
-
-# Detail Pengeluaran
-
-    - layanan_id
-    - jumlah
+    kode_akun
+    debet
+    kredit

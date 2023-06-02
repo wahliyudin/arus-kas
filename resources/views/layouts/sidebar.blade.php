@@ -55,6 +55,15 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion">
                         <div class="menu-item">
+                            <a class="menu-link {{ request()->routeIs('klasifikasi.index') ? 'active' : '' }}"
+                                href="{{ route('klasifikasi.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Klasifikasi</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
                             <a class="menu-link {{ request()->routeIs('akun.index') ? 'active' : '' }}"
                                 href="{{ route('akun.index') }}">
                                 <span class="menu-bullet">
