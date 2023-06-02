@@ -29,4 +29,14 @@ class Transaksi extends Model
     {
         return $this->hasMany(DetailTransaksi::class, 'no_transaksi', 'no');
     }
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'siswa_id', 'id');
+    }
+
+    public function pemasok()
+    {
+        return $this->belongsTo(Pemasok::class, 'pemasok_id', 'id');
+    }
 }

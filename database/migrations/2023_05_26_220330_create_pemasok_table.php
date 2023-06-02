@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pemasok', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('no_hp', 13);
+            $table->string('no_hp');
             $table->string('alamat');
             $table->timestamps();
         });

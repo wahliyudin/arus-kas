@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nis');
             $table->string('nama');
-            $table->string('no_hp', 13);
+            $table->string('no_hp');
             $table->string('alamat');
             $table->timestamps();
         });

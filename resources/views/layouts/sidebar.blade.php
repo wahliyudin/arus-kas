@@ -92,6 +92,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('transaksi.index') ? 'active' : '' }}"
+                        href="{{ route('transaksi.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-category fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                                <span class="path4"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">Transaksi</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

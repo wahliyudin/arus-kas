@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('no');
             $table->date('tanggal');
-            $table->unsignedBigInteger('siswa_id');
-            $table->unsignedBigInteger('pemasok_id');
+            $table->unsignedBigInteger('siswa_id')->nullable();
+            $table->unsignedBigInteger('pemasok_id')->nullable();
             $table->enum('dari', [1, 2, 3]);
             $table->string('keterangan');
             $table->timestamps();
