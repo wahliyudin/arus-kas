@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Akun;
+use App\Models\KasMasuk;
 use App\Models\Klasifikasi;
 use App\Models\Pemasok;
 use App\Models\Siswa;
-use App\Models\Transaksi;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
 
-class TransaksiController extends Controller
+class KasMasukController extends Controller
 {
     public function index()
     {
@@ -20,14 +19,14 @@ class TransaksiController extends Controller
         $akuns = Akun::query()->get();
         $klasifikasis = Klasifikasi::query()->get();
         $no = $this->generateNumber();
-        $transaksis = Transaksi::query()->get();
-        return view('transaksi.index', compact('transaksis', 'no',  'siswas', 'pemasoks', 'akuns', 'klasifikasis'));
+        $kasMasuks = KasMasuk::query()->get();
+        return view('kas-masuk.index', compact('kasMasuks', 'no',  'siswas', 'pemasoks', 'akuns', 'klasifikasis'));
     }
 
     public function store(Request $request)
     {
         try {
-            $transaksi = Transaksi::query()->create([
+            $kasMasuk = KasMasuk::query()->create([
                 'no' => $request->no,
                 'tanggal' => $request->tanggal,
                 'siswa_id' => $request->siswa,
@@ -35,7 +34,7 @@ class TransaksiController extends Controller
                 'dari' => $request->dari,
                 'keterangan' => $request->keterangan,
             ]);
-            $data = $request->detail_transaksi;
+            $data = $request->detail_kasMasuk;
             $detail = [];
             for ($i = 0; $i < count($data); $i++) {
                 array_push($detail, [
@@ -45,7 +44,7 @@ class TransaksiController extends Controller
                     'kredit' => (int)str($data[$i]['kredit'])->replace('.', '')->value(),
                 ]);
             }
-            $transaksi->detailTransaksi()->createMany($detail);
+            $kasMasuk->detailKasMasuk()->createMany($detail);
             return response()->json([
                 'message' => 'Successfully'
             ]);
@@ -54,20 +53,20 @@ class TransaksiController extends Controller
         }
     }
 
-    public function edit(Transaksi $transaksi)
+    public function edit(KasMasuk $kasMasuk)
     {
         try {
-            return response()->json($transaksi);
+            return response()->json($kasMasuk);
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-    public function destroy(Transaksi $transaksi)
+    public function destroy(KasMasuk $kasMasuk)
     {
         try {
-            $transaksi->detailTransaksi()->delete();
-            $transaksi->delete();
+            $kasMasuk->detailKasMasuk()->delete();
+            $kasMasuk->delete();
             return response()->json([
                 'message' => 'Berhasil dihapus'
             ]);
@@ -79,6 +78,6 @@ class TransaksiController extends Controller
     private function generateNumber()
     {
         $date = now()->format('ymd');
-        return IdGenerator::generate(['table' => 'transaksi', 'field' => 'no', 'length' => 11, 'prefix' => "T$date-"]);
+        return IdGenerator::generate(['table' => 'kas_masuk', 'field' => 'no', 'length' => 11, 'prefix' => "T$date-"]);
     }
 }

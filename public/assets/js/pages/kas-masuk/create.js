@@ -51,9 +51,9 @@ var KTModalCustomersAdd = function () {
                         submitButton.disabled = true;
                         $.ajax({
                             type: "POST",
-                            url: "/transaksi/store",
+                            url: "/kas-masuk/store",
                             data: {
-                                key: $(submitButton).data('transaksi'),
+                                key: $(submitButton).data('kas-masuk'),
                                 nama: $($(form).find('input[name="nama"]')).val(),
                             },
                             dataType: "JSON",
@@ -174,20 +174,20 @@ var KTModalCustomersAdd = function () {
     };
 
     var buttonCreate = () => {
-        $('[data-bs-target="#create-transaksi"]').on('click', function () {
+        $('[data-bs-target="#create-kas-masuk"]').on('click', function () {
             $($(form).find('input[name="nama"]')).val('');
-            $(submitButton).data('transaksi', '');
+            $(submitButton).data('kas-masuk', '');
         });
     }
     var buttonEdit = () => {
-        $('#transaksi_table').on('click', '.btn-edit', function () {
+        $('#kas_masuk_table').on('click', '.btn-edit', function () {
             var target = this;
             $(target).attr("data-kt-indicator", "on");
-            var transaksi = $(this).data('transaksi');
-            $(submitButton).data('transaksi', transaksi);
+            var kas_masuk = $(this).data('kas-masuk');
+            $(submitButton).data('kas-masuk', kas_masuk);
             $.ajax({
                 type: "POST",
-                url: `/transaksi/${transaksi}/edit`,
+                url: `/kas-masuk/${kas_masuk}/edit`,
                 dataType: "JSON",
                 success: function (response) {
                     $($(form).find('input[name="nama"]')).val(response.nama);
@@ -208,12 +208,12 @@ var KTModalCustomersAdd = function () {
                 }
             });
             // Elements
-            modal = new bootstrap.Modal(document.querySelector('#create-transaksi'));
+            modal = new bootstrap.Modal(document.querySelector('#create-kas-masuk'));
 
-            form = document.querySelector('#create-transaksi_form');
-            submitButton = form.querySelector('#create-transaksi_submit');
-            cancelButton = form.querySelector('#create-transaksi_cancel');
-            closeButton = form.querySelector('#create-transaksi_close');
+            form = document.querySelector('#create-kas-masuk_form');
+            submitButton = form.querySelector('#create-kas-masuk_submit');
+            cancelButton = form.querySelector('#create-kas-masuk_cancel');
+            closeButton = form.querySelector('#create-kas-masuk_close');
 
             handleForm();
             buttonCreate();

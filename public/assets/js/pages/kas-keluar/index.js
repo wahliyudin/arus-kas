@@ -215,8 +215,8 @@ var KTCustomersList = function () {
     }
 
     var handleDeleteRow = () => {
-        $('#transaksi_table').on('click', '.btn-delete', function () {
-            var transaksi = $(this).data('transaksi');
+        $('#kas_keluar_table').on('click', '.btn-delete', function () {
+            var kas_keluar = $(this).data('kas-keluar');
             var target = this;
             $(target).attr("data-kt-indicator", "on");
             Swal.fire({
@@ -234,7 +234,7 @@ var KTCustomersList = function () {
                 if (result.value) {
                     $.ajax({
                         type: "DELETE",
-                        url: `/transaksi/${transaksi}/destroy`,
+                        url: `/kas-keluar/${kas_keluar}/destroy`,
                         dataType: "JSON",
                         success: function (response) {
                             $(target).removeAttr("data-kt-indicator");
@@ -290,7 +290,7 @@ var KTCustomersList = function () {
     // Public methods
     return {
         init: function () {
-            table = document.querySelector('#transaksi_table');
+            table = document.querySelector('#kas_keluar_table');
 
             if (!table) {
                 return;

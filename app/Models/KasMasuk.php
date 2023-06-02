@@ -6,11 +6,11 @@ use App\Enums\Dari;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaksi extends Model
+class KasMasuk extends Model
 {
     use HasFactory;
 
-    protected $table = 'transaksi';
+    protected $table = 'kas_masuk';
 
     protected $fillable = [
         'no',
@@ -25,9 +25,9 @@ class Transaksi extends Model
         'dari' => Dari::class
     ];
 
-    public function detailTransaksi()
+    public function detailKasMasuk()
     {
-        return $this->hasMany(DetailTransaksi::class, 'no_transaksi', 'no');
+        return $this->hasMany(DetailKasMasuk::class, 'no_kas_masuk', 'no');
     }
 
     public function siswa()
