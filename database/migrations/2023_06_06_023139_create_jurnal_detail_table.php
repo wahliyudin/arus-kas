@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_akun');
             $table->string('kode_jurnal');
+            $table->unsignedBigInteger('klasifikasi_id');
             $table->bigInteger('debet')->default(0);
             $table->bigInteger('kredit')->default(0);
             $table->timestamps();

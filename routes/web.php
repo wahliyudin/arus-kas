@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KasMasukController;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\SiswaController;
@@ -61,4 +62,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('guru/store', [GuruController::class, 'store'])->name('guru.store');
     Route::post('guru/{guru}/edit', [GuruController::class, 'edit'])->name('guru.edit');
     Route::delete('guru/{guru}/destroy', [GuruController::class, 'destroy'])->name('guru.destroy');
+
+    Route::get('kas-masuk', [KasMasukController::class, 'index'])->name('kas-masuk.index');
+    Route::post('kas-masuk/list', [KasMasukController::class, 'list'])->name('kas-masuk.list');
+    Route::get('kas-masuk/create', [KasMasukController::class, 'create'])->name('kas-masuk.create');
+    Route::post('kas-masuk/store', [KasMasukController::class, 'store'])->name('kas-masuk.store');
+    Route::delete('kas-masuk/{kasMasuk:kode}/destroy', [KasMasukController::class, 'destroy'])->name('kas-masuk.destroy');
 });

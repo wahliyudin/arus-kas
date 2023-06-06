@@ -14,6 +14,7 @@ class JurnalDetail extends Model
     protected $fillable = [
         'kode_akun',
         'kode_jurnal',
+        'klasifikasi_id',
         'debet',
         'kredit',
     ];
@@ -21,6 +22,11 @@ class JurnalDetail extends Model
     public function jurnal()
     {
         return $this->belongsTo(Jurnal::class, 'kode_jurnal', 'kode');
+    }
+
+    public function klasifikasi()
+    {
+        return $this->belongsTo(Klasifikasi::class, 'klasifikasi_id', 'id');
     }
 
     public function akun()

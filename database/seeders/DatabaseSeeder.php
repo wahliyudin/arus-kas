@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Akun;
+use App\Models\Guru;
 use App\Models\Klasifikasi;
 use App\Models\Pemasok;
 use App\Models\Siswa;
@@ -27,5 +28,6 @@ class DatabaseSeeder extends Seeder
         Pemasok::factory(10)->create();
         Siswa::factory(10)->create();
         Klasifikasi::factory(10)->create();
+        Guru::factory(10)->create();
     }
 }

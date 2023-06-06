@@ -39,4 +39,9 @@ class Jurnal extends Model
             $model->kode = IdGenerator::generate(['table' => $model->table, 'field' => 'kode', 'length' => 6, 'prefix' => "INV-"]);
         });
     }
+
+    public function jurnalDetails()
+    {
+        return $this->hasMany(JurnalDetail::class, 'kode_jurnal', 'kode');
+    }
 }
