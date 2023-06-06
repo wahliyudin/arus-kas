@@ -80,18 +80,22 @@
                 },
                 paging: false,
                 columns: [{
+                        orderable: false,
                         name: 'one',
                         data: 'one',
                     },
                     {
+                        orderable: false,
                         name: 'two',
                         data: 'two',
                     },
                     {
+                        orderable: false,
                         name: 'three',
                         data: 'three',
                     },
                     {
+                        orderable: false,
                         name: 'four',
                         data: 'four',
                     },

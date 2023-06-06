@@ -90,6 +90,7 @@
                         return json.data;
                     },
                 },
+                paging: false,
                 columns: [{
                         name: 'kode',
                         data: 'kode',

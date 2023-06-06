@@ -90,35 +90,44 @@
                         return json.data;
                     },
                 },
+                paging: false,
                 columns: [{
+                        orderable: false,
                         name: 'kode',
                         data: 'kode',
                     },
                     {
+                        orderable: false,
                         name: 'tanggal',
                         data: 'tanggal',
                     },
                     {
+                        orderable: false,
                         name: 'no_ref',
                         data: 'no_ref',
                     },
                     {
+                        orderable: false,
                         name: 'keterangan',
                         data: 'keterangan',
                     },
                     {
+                        orderable: false,
                         name: 'kode_akun',
                         data: 'kode_akun',
                     },
                     {
+                        orderable: false,
                         name: 'nama_akun',
                         data: 'nama_akun',
                     },
                     {
+                        orderable: false,
                         name: 'debet',
                         data: 'debet',
                     },
                     {
+                        orderable: false,
                         name: 'kredit',
                         data: 'kredit',
                     },
