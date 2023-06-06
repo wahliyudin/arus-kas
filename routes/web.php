@@ -1,12 +1,8 @@
 <?php
 
 use App\Http\Controllers\AkunController;
-use App\Http\Controllers\BukuBesarController;
-use App\Http\Controllers\JurnalUmumController;
-use App\Http\Controllers\KasKeluarController;
-use App\Http\Controllers\KasMasukController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KlasifikasiController;
-use App\Http\Controllers\NeracaController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Auth;
@@ -59,20 +55,8 @@ Route::post('siswa/store', [SiswaController::class, 'store'])->name('siswa.store
 Route::post('siswa/{siswa}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
 Route::delete('siswa/{siswa}/destroy', [SiswaController::class, 'destroy'])->name('siswa.destroy');
 
-Route::get('kas-masuk', [KasMasukController::class, 'index'])->name('kas-masuk.index');
-Route::post('kas-masuk/list', [KasMasukController::class, 'list'])->name('kas-masuk.list');
-Route::get('kas-masuk/create', [KasMasukController::class, 'create'])->name('kas-masuk.create');
-Route::post('kas-masuk/store', [KasMasukController::class, 'store'])->name('kas-masuk.store');
-Route::post('kas-masuk/{kasMasuk}/edit', [KasMasukController::class, 'edit'])->name('kas-masuk.edit');
-Route::delete('kas-masuk/{kasMasuk}/destroy', [KasMasukController::class, 'destroy'])->name('kas-masuk.destroy');
-
-Route::get('kas-keluar', [KasKeluarController::class, 'index'])->name('kas-keluar.index');
-Route::post('kas-keluar/list', [KasKeluarController::class, 'list'])->name('kas-keluar.list');
-Route::get('kas-keluar/create', [KasKeluarController::class, 'create'])->name('kas-keluar.create');
-Route::post('kas-keluar/store', [KasKeluarController::class, 'store'])->name('kas-keluar.store');
-Route::post('kas-keluar/{kasKeluar}/edit', [KasKeluarController::class, 'edit'])->name('kas-keluar.edit');
-Route::delete('kas-keluar/{kasKeluar}/destroy', [KasKeluarController::class, 'destroy'])->name('kas-keluar.destroy');
-
-Route::get('jurnal-umum', [JurnalUmumController::class, 'index'])->name('jurnal-umum.index');
-Route::get('buku-besar', [BukuBesarController::class, 'index'])->name('buku-besar.index');
-Route::get('neraca', [NeracaController::class, 'index'])->name('neraca.index');
+Route::get('guru', [GuruController::class, 'index'])->name('guru.index');
+Route::post('guru/list', [GuruController::class, 'list'])->name('guru.list');
+Route::post('guru/store', [GuruController::class, 'store'])->name('guru.store');
+Route::post('guru/{guru}/edit', [GuruController::class, 'edit'])->name('guru.edit');
+Route::delete('guru/{guru}/destroy', [GuruController::class, 'destroy'])->name('guru.destroy');

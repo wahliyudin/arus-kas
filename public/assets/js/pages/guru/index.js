@@ -6,8 +6,7 @@ var KTCustomersList = function () {
     var datatable;
     var filterMonth;
     var filterPayment;
-    var table;
-    var tanggal;
+    var table
 
     // Private functions
     var initCustomerList = function () {
@@ -28,12 +27,47 @@ var KTCustomersList = function () {
         // Init datatable --- more info on datatables: https://datatables.net/manual/
         datatable = $(table).DataTable({
             processing: true,
+            serverSide: true,
             order: [[1, 'asc']],
             select: {
                 style: 'multi',
                 selector: 'td:first-child input[type="checkbox"]',
                 className: 'row-selected'
-            }
+            },
+            ajax: {
+                type: "POST",
+                url: "/guru/list"
+            },
+            columns: [
+                {
+                    name: 'check',
+                    data: 'check',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    name: 'nama',
+                    data: 'nama',
+                },
+                {
+                    name: 'jenis_kelamin',
+                    data: 'jenis_kelamin',
+                },
+                {
+                    name: 'no_hp',
+                    data: 'no_hp',
+                },
+                {
+                    name: 'alamat',
+                    data: 'alamat',
+                },
+                {
+                    name: 'action',
+                    data: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
         });
 
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
@@ -92,7 +126,7 @@ var KTCustomersList = function () {
                             }
                         }).then(function () {
                             // Remove current row
-                            location.reload();
+                            datatable.row($(parent)).remove().draw();
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
@@ -110,6 +144,17 @@ var KTCustomersList = function () {
         });
     }
 
+    // Handle status filter dropdown
+    var handleStatusFilter = () => {
+        const filterStatus = document.querySelector('[data-kt-ecommerce-order-filter="status"]');
+        $(filterStatus).on('change', e => {
+            let value = e.target.value;
+            if (value === 'all') {
+                value = '';
+            }
+            datatable.column(3).search(value).draw();
+        });
+    }
 
     // Init toggle toolbar
     var initToggleToolbar = () => {
@@ -215,8 +260,8 @@ var KTCustomersList = function () {
     }
 
     var handleDeleteRow = () => {
-        $('#kas_keluar_table').on('click', '.btn-delete', function () {
-            var kas_keluar = $(this).data('kas-keluar');
+        $('#guru_table').on('click', '.btn-delete', function () {
+            var guru = $(this).data('guru');
             var target = this;
             $(target).attr("data-kt-indicator", "on");
             Swal.fire({
@@ -234,7 +279,7 @@ var KTCustomersList = function () {
                 if (result.value) {
                     $.ajax({
                         type: "DELETE",
-                        url: `/kas-keluar/${kas_keluar}/destroy`,
+                        url: `/guru/${guru}/destroy`,
                         dataType: "JSON",
                         success: function (response) {
                             $(target).removeAttr("data-kt-indicator");
@@ -247,7 +292,7 @@ var KTCustomersList = function () {
                                     confirmButton: "btn fw-bold btn-primary",
                                 }
                             }).then(function () {
-                                location.reload();
+                                datatable.ajax.reload();
                             });
                         },
                         error: function (jqXHR) {
@@ -287,10 +332,11 @@ var KTCustomersList = function () {
 
         });
     }
+
     // Public methods
     return {
         init: function () {
-            table = document.querySelector('#kas_keluar_table');
+            table = document.querySelector('#guru_table');
 
             if (!table) {
                 return;
@@ -301,6 +347,7 @@ var KTCustomersList = function () {
             handleSearchDatatable();
             handleDeleteRows();
             handleDeleteRow();
+            handleStatusFilter();
         }
     }
 }();
