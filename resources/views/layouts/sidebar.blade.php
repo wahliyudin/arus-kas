@@ -53,7 +53,8 @@
                         <span class="menu-title">Master</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion">
+                    <div
+                        class="menu-sub menu-sub-accordion {{ request()->routeIs('klasifikasi.index') || request()->routeIs('akun.index') || request()->routeIs('pemasok.index') || request()->routeIs('siswa.index') || request()->routeIs('guru.index') ? 'hover show' : '' }}">
                         <div class="menu-item">
                             <a class="menu-link {{ request()->routeIs('klasifikasi.index') ? 'active' : '' }}"
                                 href="{{ route('klasifikasi.index') }}">
