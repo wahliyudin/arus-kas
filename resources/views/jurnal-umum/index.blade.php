@@ -95,12 +95,12 @@
                         data: 'kode',
                     },
                     {
-                        name: 'no_ref',
-                        data: 'no_ref',
-                    },
-                    {
                         name: 'tanggal',
                         data: 'tanggal',
+                    },
+                    {
+                        name: 'no_ref',
+                        data: 'no_ref',
                     },
                     {
                         name: 'keterangan',
