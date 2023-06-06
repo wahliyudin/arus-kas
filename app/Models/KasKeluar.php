@@ -33,7 +33,7 @@ class KasKeluar extends Model
     ];
 
     protected $casts = [
-        'dari' => Penerima::class
+        'penerima' => Penerima::class
     ];
 
     protected function kode(): Attribute

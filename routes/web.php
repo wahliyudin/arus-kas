@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KasKeluarController;
 use App\Http\Controllers\KasMasukController;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\PemasokController;
@@ -70,4 +71,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('kas-masuk/{kasMasuk:kode}/edit', [KasMasukController::class, 'edit'])->name('kas-masuk.edit');
     Route::post('kas-masuk/{kasMasuk:kode}/update', [KasMasukController::class, 'update'])->name('kas-masuk.update');
     Route::delete('kas-masuk/{kasMasuk:kode}/destroy', [KasMasukController::class, 'destroy'])->name('kas-masuk.destroy');
+
+    Route::get('kas-keluar', [KasKeluarController::class, 'index'])->name('kas-keluar.index');
+    Route::post('kas-keluar/list', [KasKeluarController::class, 'list'])->name('kas-keluar.list');
+    Route::get('kas-keluar/create', [KasKeluarController::class, 'create'])->name('kas-keluar.create');
+    Route::post('kas-keluar/store', [KasKeluarController::class, 'store'])->name('kas-keluar.store');
+    Route::get('kas-keluar/{kasKeluar:kode}/edit', [KasKeluarController::class, 'edit'])->name('kas-keluar.edit');
+    Route::post('kas-keluar/{kasKeluar:kode}/update', [KasKeluarController::class, 'update'])->name('kas-keluar.update');
+    Route::delete('kas-keluar/{kasKeluar:kode}/destroy', [KasKeluarController::class, 'destroy'])->name('kas-keluar.destroy');
 });
