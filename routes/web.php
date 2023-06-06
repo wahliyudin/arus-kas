@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\BukuBesarController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KasKeluarController;
 use App\Http\Controllers\KasMasukController;
@@ -79,4 +80,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('kas-keluar/{kasKeluar:kode}/edit', [KasKeluarController::class, 'edit'])->name('kas-keluar.edit');
     Route::post('kas-keluar/{kasKeluar:kode}/update', [KasKeluarController::class, 'update'])->name('kas-keluar.update');
     Route::delete('kas-keluar/{kasKeluar:kode}/destroy', [KasKeluarController::class, 'destroy'])->name('kas-keluar.destroy');
+
+    Route::get('buku-besar', [BukuBesarController::class, 'index'])->name('buku-besar.index');
+    Route::post('buku-besar/datatable', [BukuBesarController::class, 'datatable'])->name('buku-besar.datatable');
+    Route::post('buku-besar/export', [BukuBesarController::class, 'export'])->name('buku-besar.export');
 });
