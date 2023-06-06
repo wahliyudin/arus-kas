@@ -44,4 +44,14 @@ class Jurnal extends Model
     {
         return $this->hasMany(JurnalDetail::class, 'kode_jurnal', 'kode');
     }
+
+    public function kasMasuk()
+    {
+        return $this->hasOne(KasMasuk::class, 'kode_jurnal', 'kode');
+    }
+
+    public function kasKeluar()
+    {
+        return $this->hasOne(KasKeluar::class, 'kode_jurnal', 'kode');
+    }
 }

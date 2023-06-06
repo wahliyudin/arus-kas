@@ -3,6 +3,7 @@
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BukuBesarController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\JurnalUmumController;
 use App\Http\Controllers\KasKeluarController;
 use App\Http\Controllers\KasMasukController;
 use App\Http\Controllers\KlasifikasiController;
@@ -84,4 +85,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('buku-besar', [BukuBesarController::class, 'index'])->name('buku-besar.index');
     Route::post('buku-besar/datatable', [BukuBesarController::class, 'datatable'])->name('buku-besar.datatable');
     Route::post('buku-besar/export', [BukuBesarController::class, 'export'])->name('buku-besar.export');
+
+    Route::get('jurnal-umum', [JurnalUmumController::class, 'index'])->name('jurnal-umum.index');
+    Route::post('jurnal-umum/datatable', [JurnalUmumController::class, 'datatable'])->name('jurnal-umum.datatable');
+    Route::post('jurnal-umum/export', [JurnalUmumController::class, 'export'])->name('jurnal-umum.export');
 });

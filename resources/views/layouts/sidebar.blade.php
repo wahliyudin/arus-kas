@@ -151,7 +151,7 @@
                         <span class="menu-arrow"></span>
                     </span>
                     <div
-                        class="menu-sub menu-sub-accordion {{ request()->routeIs('buku-besar.index') ? 'hover show' : '' }}">
+                        class="menu-sub menu-sub-accordion {{ request()->routeIs('buku-besar.index') || request()->routeIs('jurnal-umum.index') ? 'hover show' : '' }}">
                         <div class="menu-item">
                             <a class="menu-link" href="">
                                 <span class="menu-bullet">
@@ -169,7 +169,8 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="">
+                            <a class="menu-link {{ request()->routeIs('jurnal-umum.index') ? 'active' : '' }}"
+                                href="{{ route('jurnal-umum.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
