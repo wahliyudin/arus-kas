@@ -4,21 +4,21 @@
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 
-@section('title', 'Buku Besar')
+@section('title', 'Arus Kas')
 
 @section('toolbar')
     <div id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
         <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                    Buku Besar
+                    Arus Kas
                 </h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <li class="breadcrumb-item text-muted">Laporan</li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
-                    <li class="breadcrumb-item text-muted">Buku Besar</li>
+                    <li class="breadcrumb-item text-muted">Arus Kas</li>
                 </ul>
             </div>
         </div>
@@ -49,17 +49,7 @@
             </div>
         </div>
         <div class="card-body pt-0">
-            <table class="table align-middle table-bordered table-row-dashed fs-6 gy-5" id="buku-besar_table">
-                <thead>
-                    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                        <th>No Transaksi</th>
-                        <th>Tanggal</th>
-                        <th>Keterangan</th>
-                        <th>Debet</th>
-                        <th>Kredit</th>
-                        <th>Saldo</th>
-                    </tr>
-                </thead>
+            <table class="table align-middle table-row-dashed fs-6 gy-5" id="arus-kas_table">
                 <tbody class="fw-semibold text-gray-600">
                 </tbody>
             </table>
@@ -76,12 +66,10 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            var table = $('#buku-besar_table').DataTable({
-                order: [
-                    [1, 'ASC']
-                ],
+            var table = $('#arus-kas_table').DataTable({
+                order: [],
                 ajax: {
-                    url: "/buku-besar/datatable",
+                    url: "/arus-kas/datatable",
                     type: "POST",
                     data: function(data) {
                         data.range = $('input[name="range"]').val();
@@ -90,29 +78,22 @@
                         return json.data;
                     },
                 },
+                paging: false,
                 columns: [{
-                        name: 'kode',
-                        data: 'kode',
+                        name: 'one',
+                        data: 'one',
                     },
                     {
-                        name: 'tanggal',
-                        data: 'tanggal',
+                        name: 'two',
+                        data: 'two',
                     },
                     {
-                        name: 'keterangan',
-                        data: 'keterangan',
+                        name: 'three',
+                        data: 'three',
                     },
                     {
-                        name: 'debet',
-                        data: 'debet',
-                    },
-                    {
-                        name: 'kredit',
-                        data: 'kredit',
-                    },
-                    {
-                        name: 'saldo',
-                        data: 'saldo',
+                        name: 'four',
+                        data: 'four',
                     },
                 ],
             });
@@ -127,7 +108,7 @@
                 e.preventDefault();
                 $.ajax({
                     type: "POST",
-                    url: "/buku-besar/export",
+                    url: "/arus-kas/export",
                     data: {
                         range: $('input[name="range"]').val()
                     },
@@ -138,7 +119,7 @@
                         var a = document.createElement('a');
                         var url = window.URL.createObjectURL(data);
                         a.href = url;
-                        a.download = 'buku-besar.pdf';
+                        a.download = 'arus-kas.pdf';
                         document.body.append(a);
                         a.click();
                         a.remove();

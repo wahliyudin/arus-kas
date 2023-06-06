@@ -2,11 +2,10 @@
     data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
     data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
 
-    <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
+    <div class="app-sidebar-logo h-100px px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
-        <a href="../../../index.html">
-            <img alt="Logo" src="../../../assets/media/logos/default-dark.svg"
-                class="h-30px app-sidebar-logo-default" />
+        <a href="{{ route('home') }}">
+            <img alt="Logo" src="{{ asset('assets/logo.png') }}" class="h-100px app-sidebar-logo-default" />
         </a>
         <!--end::Logo image-->
 
@@ -151,21 +150,14 @@
                         <span class="menu-arrow"></span>
                     </span>
                     <div
-                        class="menu-sub menu-sub-accordion {{ request()->routeIs('buku-besar.index') || request()->routeIs('jurnal-umum.index') ? 'hover show' : '' }}">
+                        class="menu-sub menu-sub-accordion {{ request()->routeIs('buku-besar.index') || request()->routeIs('jurnal-umum.index') || request()->routeIs('arus-kas.index') ? 'hover show' : '' }}">
                         <div class="menu-item">
-                            <a class="menu-link" href="">
+                            <a class="menu-link {{ request()->routeIs('arus-kas.index') ? 'active' : '' }}"
+                                href="{{ route('arus-kas.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Jurnal Kas Masuk</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Jurnal Kas Keluar</span>
+                                <span class="menu-title">Arus Kas</span>
                             </a>
                         </div>
                         <div class="menu-item">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\ArusKasController;
 use App\Http\Controllers\BukuBesarController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JurnalUmumController;
@@ -89,4 +90,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('jurnal-umum', [JurnalUmumController::class, 'index'])->name('jurnal-umum.index');
     Route::post('jurnal-umum/datatable', [JurnalUmumController::class, 'datatable'])->name('jurnal-umum.datatable');
     Route::post('jurnal-umum/export', [JurnalUmumController::class, 'export'])->name('jurnal-umum.export');
+
+    Route::get('arus-kas', [ArusKasController::class, 'index'])->name('arus-kas.index');
+    Route::post('arus-kas/datatable', [ArusKasController::class, 'datatable'])->name('arus-kas.datatable');
+    Route::post('arus-kas/export', [ArusKasController::class, 'export'])->name('arus-kas.export');
 });

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Jurnal Umum</title>
+    <title>Arus Kas</title>
     <style>
         .table {
             --bs-table-color: var(--bs-body-color);
@@ -48,36 +48,36 @@
 
 <body>
     <div style="text-align: center; margin-bottom: 10px;">
-        <h3 style="margin: 10px 0;">Jurnal Umum</h3>
+        <h3 style="margin: 10px 0;">Arus Kas</h3>
         <span>{{ $periode }}</span>
     </div>
+    @php
+        $grandTotal = 0;
+    @endphp
     <table class="table" style="border: 1px solid black; border-collapse: collapse;">
-        <thead style="border: 1px solid black;">
-            <tr style="border: 1px solid black;">
-                <th style="border: 1px solid black;">Kode Transaksi</th>
-                <th style="border: 1px solid black;">Tanggal</th>
-                <th style="border: 1px solid black;">No. Ref</th>
-                <th style="border: 1px solid black;">Keterangan</th>
-                <th style="border: 1px solid black;">Kode Akun</th>
-                <th style="border: 1px solid black;">Nama Akun</th>
-                <th style="border: 1px solid black;">Debet</th>
-                <th style="border: 1px solid black;">Kredit</th>
-            </tr>
-        </thead>
         <tbody>
             @foreach ($jurnals as $jurnal)
                 <tr>
-                    <td style="border: 1px solid black;">{{ $jurnal['kode'] }}</td>
-                    <td style="border: 1px solid black;">{{ $jurnal['tanggal'] }}</td>
-                    <td style="border: 1px solid black;">{{ $jurnal['no_ref'] }}</td>
-                    <td style="border: 1px solid black;">{{ $jurnal['keterangan'] }}</td>
-                    <td style="border: 1px solid black;">{{ $jurnal['kode_akun'] }}</td>
-                    <td style="border: 1px solid black;">{{ $jurnal['nama_akun'] }}</td>
-                    <td style="border: 1px solid black;">{{ $jurnal['debet'] }}</td>
-                    <td style="border: 1px solid black;">{{ $jurnal['kredit'] }}</td>
+                    <td style="border: 1px solid black;">{!! $jurnal['one'] !!}</td>
+                    <td style="border: 1px solid black;">{!! $jurnal['two'] !!}</td>
+                    <td style="border: 1px solid black;">{!! $jurnal['three'] !!}</td>
+                    <td style="border: 1px solid black;">{!! $jurnal['four'] !!}</td>
                 </tr>
+                @php
+                    $grandTotal += (int) str($jurnal['four'])
+                        ->replace('.', '')
+                        ->value();
+                @endphp
             @endforeach
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" style="border: 1px solid black; text-align: end; color: black; font-weight: 700;">
+                    Total</td>
+                <td style="border: 1px solid black; color: black; font-weight: 700;">
+                    {{ number_format($grandTotal, 0, ',', '.') }}</td>
+            </tr>
+        </tfoot>
     </table>
 </body>
 

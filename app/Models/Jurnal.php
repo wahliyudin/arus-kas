@@ -36,7 +36,7 @@ class Jurnal extends Model
     {
         parent::boot();
         self::creating(function ($model) {
-            $model->kode = IdGenerator::generate(['table' => $model->table, 'field' => 'kode', 'length' => 6, 'prefix' => "INV-"]);
+            $model->kode = IdGenerator::generate(['table' => $model->table, 'field' => 'kode', 'length' => 11, 'prefix' => "J" . now()->format('ymd') . '-']);
         });
     }
 
