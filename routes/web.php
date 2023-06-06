@@ -67,5 +67,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('kas-masuk/list', [KasMasukController::class, 'list'])->name('kas-masuk.list');
     Route::get('kas-masuk/create', [KasMasukController::class, 'create'])->name('kas-masuk.create');
     Route::post('kas-masuk/store', [KasMasukController::class, 'store'])->name('kas-masuk.store');
+    Route::get('kas-masuk/{kasMasuk:kode}/edit', [KasMasukController::class, 'edit'])->name('kas-masuk.edit');
+    Route::post('kas-masuk/{kasMasuk:kode}/update', [KasMasukController::class, 'update'])->name('kas-masuk.update');
     Route::delete('kas-masuk/{kasMasuk:kode}/destroy', [KasMasukController::class, 'destroy'])->name('kas-masuk.destroy');
 });

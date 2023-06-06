@@ -60,10 +60,71 @@ class KasMasukController extends Controller
                 'tanggal' => $request->tanggal,
                 'keterangan' => $request->keterangan,
             ]);
-            $jurnal->jurnalDetails()->createMany($request->detail_transaksi);
+            $jurnalDetails = [];
+            $transaksis = $request->detail_transaksi;
+            for ($i = 0; $i < count($transaksis); $i++) {
+                array_push($jurnalDetails, [
+                    'kode_akun' => $transaksis[$i]['kode_akun'],
+                    'klasifikasi_id' => $transaksis[$i]['klasifikasi_id'],
+                    'debet' => str($transaksis[$i]['debet'])->replace('.', ''),
+                    'kredit' => str($transaksis[$i]['kredit'])->replace('.', ''),
+                ]);
+            }
+            $jurnal->jurnalDetails()->createMany($jurnalDetails);
             KasMasuk::query()->create([
                 'kode_akun' => $request->kode_akun,
                 'kode_jurnal' => $jurnal->kode,
+                'siswa_id' => $request->siswa_id,
+                'pemasok_id' => $request->pemasok_id,
+                'guru_id' => $request->guru_id,
+                'dari' => $request->dari,
+                'tanggal' => $request->tanggal,
+                'keterangan' => $request->keterangan,
+            ]);
+            return response()->json([
+                'message' => 'Berhasil disimpan'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function edit(KasMasuk $kasMasuk)
+    {
+        $akuns = Akun::query()->get();
+        $siswas = Siswa::query()->get();
+        $pemasoks = Pemasok::query()->get();
+        $gurus = Guru::query()->get();
+        $klasifikasis = Klasifikasi::query()->get();
+        return view('kas-masuk.edit', compact('akuns', 'kasMasuk', 'siswas', 'klasifikasis', 'pemasoks', 'gurus'));
+    }
+
+    public function update(Request $request, KasMasuk $kasMasuk)
+    {
+        try {
+            $request->validate([
+                'tanggal' => 'required',
+                'kode_akun' => 'required',
+                'dari' => 'required',
+            ]);
+            $kasMasuk->jurnal()->update([
+                'tanggal' => $request->tanggal,
+                'keterangan' => $request->keterangan,
+            ]);
+            $kasMasuk->jurnal?->jurnalDetails()->delete();
+            $jurnalDetails = [];
+            $transaksis = $request->detail_transaksi;
+            for ($i = 0; $i < count($transaksis); $i++) {
+                array_push($jurnalDetails, [
+                    'kode_akun' => $transaksis[$i]['kode_akun'],
+                    'klasifikasi_id' => $transaksis[$i]['klasifikasi_id'],
+                    'debet' => str($transaksis[$i]['debet'])->replace('.', ''),
+                    'kredit' => str($transaksis[$i]['kredit'])->replace('.', ''),
+                ]);
+            }
+            $kasMasuk->jurnal?->jurnalDetails()->createMany($jurnalDetails);
+            $kasMasuk->update([
+                'kode_akun' => $request->kode_akun,
                 'siswa_id' => $request->siswa_id,
                 'pemasok_id' => $request->pemasok_id,
                 'guru_id' => $request->guru_id,
