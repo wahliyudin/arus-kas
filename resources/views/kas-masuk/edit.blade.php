@@ -4,6 +4,8 @@
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 
+@section('title', 'Edit | Kas Masuk')
+
 @section('toolbar')
     <div id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
         <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
@@ -16,7 +18,14 @@
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
-                    <li class="breadcrumb-item text-muted">Kas Masuk</li>
+                    <li class="breadcrumb-item text-muted">
+                        <a href="{{ route('kas-masuk.index') }}" class="text-muted text-hover-primary">
+                            Kas Masuk </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <li class="breadcrumb-item text-muted">Edit Kas Masuk</li>
                 </ul>
             </div>
         </div>
