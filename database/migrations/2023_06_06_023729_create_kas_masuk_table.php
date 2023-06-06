@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kas_masuk', function (Blueprint $table) {
-            $table->id();
-            $table->string('no');
-            $table->date('tanggal');
+            $table->string('kode')->primary();
+            $table->string('kode_akun');
+            $table->string('kode_jurnal');
             $table->unsignedBigInteger('siswa_id')->nullable();
             $table->unsignedBigInteger('pemasok_id')->nullable();
-            $table->enum('dari', [1, 2, 3]);
+            $table->unsignedBigInteger('guru_id')->nullable();
+            $table->enum('dari', [1, 2, 3, 4]);
+            $table->date('tanggal');
             $table->string('keterangan');
             $table->timestamps();
         });

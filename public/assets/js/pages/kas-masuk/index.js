@@ -4,13 +4,10 @@
 var KTCustomersList = function () {
     // Define shared variables
     var datatable;
-    var filterMonth;
-    var filterPayment;
-    var table;
-    var tanggal;
+    var table
 
     // Private functions
-    var initCustomerList = function () {
+    var initKasMasukList = function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -28,12 +25,39 @@ var KTCustomersList = function () {
         // Init datatable --- more info on datatables: https://datatables.net/manual/
         datatable = $(table).DataTable({
             processing: true,
+            serverSide: true,
             order: [[1, 'asc']],
             select: {
                 style: 'multi',
                 selector: 'td:first-child input[type="checkbox"]',
                 className: 'row-selected'
-            }
+            },
+            ajax: {
+                type: "POST",
+                url: "/kas-masuk/list"
+            },
+            columns: [
+                {
+                    name: 'check',
+                    data: 'check',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    name: 'kode',
+                    data: 'kode',
+                },
+                {
+                    name: 'dari',
+                    data: 'dari',
+                },
+                {
+                    name: 'action',
+                    data: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
         });
 
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
@@ -66,11 +90,11 @@ var KTCustomersList = function () {
                 const parent = e.target.closest('tr');
 
                 // Get customer name
-                const customerName = parent.querySelectorAll('td')[1].innerText;
+                const kode = parent.querySelectorAll('td')[1].innerText;
 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    text: "Are you sure you want to delete " + customerName + "?",
+                    text: "Are you sure you want to delete " + kode + "?",
                     icon: "warning",
                     showCancelButton: true,
                     buttonsStyling: false,
@@ -83,7 +107,7 @@ var KTCustomersList = function () {
                 }).then(function (result) {
                     if (result.value) {
                         Swal.fire({
-                            text: "You have deleted " + customerName + "!.",
+                            text: "You have deleted " + kode + "!.",
                             icon: "success",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -92,11 +116,11 @@ var KTCustomersList = function () {
                             }
                         }).then(function () {
                             // Remove current row
-                            location.reload();
+                            datatable.row($(parent)).remove().draw();
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: customerName + " was not deleted.",
+                            text: kode + " was not deleted.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -215,8 +239,8 @@ var KTCustomersList = function () {
     }
 
     var handleDeleteRow = () => {
-        $('#kas_masuk_table').on('click', '.btn-delete', function () {
-            var kas_masuk = $(this).data('kas-masuk');
+        $('#kas-masuk_table').on('click', '.btn-delete', function () {
+            var kasMasuk = $(this).data('kas-masuk');
             var target = this;
             $(target).attr("data-kt-indicator", "on");
             Swal.fire({
@@ -234,7 +258,7 @@ var KTCustomersList = function () {
                 if (result.value) {
                     $.ajax({
                         type: "DELETE",
-                        url: `/kas-masuk/${kas_masuk}/destroy`,
+                        url: `/kas-masuk/${kasMasuk}/destroy`,
                         dataType: "JSON",
                         success: function (response) {
                             $(target).removeAttr("data-kt-indicator");
@@ -247,7 +271,7 @@ var KTCustomersList = function () {
                                     confirmButton: "btn fw-bold btn-primary",
                                 }
                             }).then(function () {
-                                location.reload();
+                                datatable.ajax.reload();
                             });
                         },
                         error: function (jqXHR) {
@@ -287,16 +311,17 @@ var KTCustomersList = function () {
 
         });
     }
+
     // Public methods
     return {
         init: function () {
-            table = document.querySelector('#kas_masuk_table');
+            table = document.querySelector('#kas-masuk_table');
 
             if (!table) {
                 return;
             }
 
-            initCustomerList();
+            initKasMasukList();
             initToggleToolbar();
             handleSearchDatatable();
             handleDeleteRows();

@@ -19,28 +19,28 @@ var KTModalCustomersAdd = function () {
                     'no_hp': {
                         validators: {
                             notEmpty: {
-                                message: 'Akun nomor handphone is required'
+                                message: 'nomor handphone is required'
                             }
                         }
                     },
                     'nama': {
                         validators: {
                             notEmpty: {
-                                message: 'Akun nama is required'
+                                message: 'nama is required'
                             }
                         }
                     },
                     'alamat': {
                         validators: {
                             notEmpty: {
-                                message: 'Akun alamat is required'
+                                message: 'alamat is required'
                             }
                         }
                     },
                     'nis': {
                         validators: {
                             notEmpty: {
-                                message: 'Akun nis is required'
+                                message: 'nis is required'
                             }
                         }
                     },

@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kas_keluar', function (Blueprint $table) {
+        Schema::create('guru', function (Blueprint $table) {
             $table->id();
-            $table->string('no');
-            $table->date('tanggal');
-            $table->unsignedBigInteger('siswa_id')->nullable();
-            $table->unsignedBigInteger('pemasok_id')->nullable();
-            $table->enum('penerima', [1, 2, 3]);
-            $table->string('keterangan');
+            $table->string('nama');
+            $table->string('no_hp');
+            $table->string('alamat');
+            $table->enum('jenis_kelamin', ['L', 'P']);
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kas_keluar');
+        Schema::dropIfExists('guru');
     }
 };

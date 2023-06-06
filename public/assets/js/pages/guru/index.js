@@ -4,10 +4,12 @@
 var KTCustomersList = function () {
     // Define shared variables
     var datatable;
+    var filterMonth;
+    var filterPayment;
     var table
 
     // Private functions
-    var initKasMasukList = function () {
+    var initCustomerList = function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -34,7 +36,7 @@ var KTCustomersList = function () {
             },
             ajax: {
                 type: "POST",
-                url: "/kas-keluar/list"
+                url: "/guru/list"
             },
             columns: [
                 {
@@ -44,12 +46,20 @@ var KTCustomersList = function () {
                     searchable: false
                 },
                 {
-                    name: 'kode',
-                    data: 'kode',
+                    name: 'nama',
+                    data: 'nama',
                 },
                 {
-                    name: 'penerima',
-                    data: 'penerima',
+                    name: 'jenis_kelamin',
+                    data: 'jenis_kelamin',
+                },
+                {
+                    name: 'no_hp',
+                    data: 'no_hp',
+                },
+                {
+                    name: 'alamat',
+                    data: 'alamat',
                 },
                 {
                     name: 'action',
@@ -90,11 +100,11 @@ var KTCustomersList = function () {
                 const parent = e.target.closest('tr');
 
                 // Get customer name
-                const kode = parent.querySelectorAll('td')[1].innerText;
+                const customerName = parent.querySelectorAll('td')[1].innerText;
 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    text: "Are you sure you want to delete " + kode + "?",
+                    text: "Are you sure you want to delete " + customerName + "?",
                     icon: "warning",
                     showCancelButton: true,
                     buttonsStyling: false,
@@ -107,7 +117,7 @@ var KTCustomersList = function () {
                 }).then(function (result) {
                     if (result.value) {
                         Swal.fire({
-                            text: "You have deleted " + kode + "!.",
+                            text: "You have deleted " + customerName + "!.",
                             icon: "success",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -120,7 +130,7 @@ var KTCustomersList = function () {
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: kode + " was not deleted.",
+                            text: customerName + " was not deleted.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -134,6 +144,17 @@ var KTCustomersList = function () {
         });
     }
 
+    // Handle status filter dropdown
+    var handleStatusFilter = () => {
+        const filterStatus = document.querySelector('[data-kt-ecommerce-order-filter="status"]');
+        $(filterStatus).on('change', e => {
+            let value = e.target.value;
+            if (value === 'all') {
+                value = '';
+            }
+            datatable.column(3).search(value).draw();
+        });
+    }
 
     // Init toggle toolbar
     var initToggleToolbar = () => {
@@ -239,8 +260,8 @@ var KTCustomersList = function () {
     }
 
     var handleDeleteRow = () => {
-        $('#kas-keluar_table').on('click', '.btn-delete', function () {
-            var kasKeluar = $(this).data('kas-keluar');
+        $('#guru_table').on('click', '.btn-delete', function () {
+            var guru = $(this).data('guru');
             var target = this;
             $(target).attr("data-kt-indicator", "on");
             Swal.fire({
@@ -258,7 +279,7 @@ var KTCustomersList = function () {
                 if (result.value) {
                     $.ajax({
                         type: "DELETE",
-                        url: `/kas-keluar/${kasKeluar}/destroy`,
+                        url: `/guru/${guru}/destroy`,
                         dataType: "JSON",
                         success: function (response) {
                             $(target).removeAttr("data-kt-indicator");
@@ -315,17 +336,18 @@ var KTCustomersList = function () {
     // Public methods
     return {
         init: function () {
-            table = document.querySelector('#kas-keluar_table');
+            table = document.querySelector('#guru_table');
 
             if (!table) {
                 return;
             }
 
-            initKasMasukList();
+            initCustomerList();
             initToggleToolbar();
             handleSearchDatatable();
             handleDeleteRows();
             handleDeleteRow();
+            handleStatusFilter();
         }
     }
 }();

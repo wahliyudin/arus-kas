@@ -43,17 +43,19 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-category fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                                <span class="path4"></span>
+                            <i class="ki-duotone ki-dropbox fs-2">
+                                <i class="path1"></i>
+                                <i class="path2"></i>
+                                <i class="path3"></i>
+                                <i class="path4"></i>
+                                <i class="path5"></i>
                             </i>
                         </span>
                         <span class="menu-title">Master</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion">
+                    <div
+                        class="menu-sub menu-sub-accordion {{ request()->routeIs('klasifikasi.index') || request()->routeIs('akun.index') || request()->routeIs('pemasok.index') || request()->routeIs('siswa.index') || request()->routeIs('guru.index') ? 'hover show' : '' }}">
                         <div class="menu-item">
                             <a class="menu-link {{ request()->routeIs('klasifikasi.index') ? 'active' : '' }}"
                                 href="{{ route('klasifikasi.index') }}">
@@ -90,22 +92,31 @@
                                 <span class="menu-title">Siswa</span>
                             </a>
                         </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->routeIs('guru.index') ? 'active' : '' }}"
+                                href="{{ route('guru.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Guru</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-category fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                                <span class="path4"></span>
+                            <i class="ki-duotone ki-dollar fs-2">
+                                <i class="path1"></i>
+                                <i class="path2"></i>
+                                <i class="path3"></i>
                             </i>
                         </span>
                         <span class="menu-title">Transaksi</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion">
+                    <div
+                        class="menu-sub menu-sub-accordion {{ request()->routeIs('kas-masuk.index') || request()->routeIs('kas-keluar.index') ? 'hover show' : '' }}">
                         <div class="menu-item">
                             <a class="menu-link {{ request()->routeIs('kas-masuk.index') ? 'active' : '' }}"
                                 href="{{ route('kas-masuk.index') }}">
@@ -129,11 +140,11 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <span class="menu-link">
                         <span class="menu-icon">
-                            <i class="ki-duotone ki-category fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                                <span class="path4"></span>
+                            <i class="ki-duotone ki-chart-simple-3 fs-2">
+                                <i class="path1"></i>
+                                <i class="path2"></i>
+                                <i class="path3"></i>
+                                <i class="path4"></i>
                             </i>
                         </span>
                         <span class="menu-title">Laporan</span>
@@ -141,8 +152,23 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion">
                         <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('jurnal-umum.index') ? 'active' : '' }}"
-                                href="{{ route('jurnal-umum.index') }}">
+                            <a class="menu-link" href="">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Jurnal Kas Masuk</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Jurnal Kas Keluar</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -150,21 +176,11 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('buku-besar.index') ? 'active' : '' }}"
-                                href="{{ route('buku-besar.index') }}">
+                            <a class="menu-link" href="">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Buku Besar</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('neraca.index') ? 'active' : '' }}"
-                                href="{{ route('neraca.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Neraca</span>
                             </a>
                         </div>
                     </div>

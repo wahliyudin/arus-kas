@@ -16,10 +16,31 @@ var KTModalCustomersAdd = function () {
             form,
             {
                 fields: {
+                    'no_hp': {
+                        validators: {
+                            notEmpty: {
+                                message: 'nomor handphone is required'
+                            }
+                        }
+                    },
                     'nama': {
                         validators: {
                             notEmpty: {
-                                message: 'Akun nama is required'
+                                message: 'nama is required'
+                            }
+                        }
+                    },
+                    'alamat': {
+                        validators: {
+                            notEmpty: {
+                                message: 'alamat is required'
+                            }
+                        }
+                    },
+                    'jenis_kelamin': {
+                        validators: {
+                            notEmpty: {
+                                message: 'jenis_kelamin is required'
                             }
                         }
                     },
@@ -51,10 +72,13 @@ var KTModalCustomersAdd = function () {
                         submitButton.disabled = true;
                         $.ajax({
                             type: "POST",
-                            url: "/kas-masuk/store",
+                            url: "/guru/store",
                             data: {
-                                key: $(submitButton).data('kas-masuk'),
+                                key: $(submitButton).data('guru'),
+                                jenis_kelamin: $($(form).find('select[name="jenis_kelamin"]')).val(),
+                                no_hp: $($(form).find('input[name="no_hp"]')).val(),
                                 nama: $($(form).find('input[name="nama"]')).val(),
+                                alamat: $($(form).find('textarea[name="alamat"]')).val(),
                             },
                             dataType: "JSON",
                             success: function (response) {
@@ -174,23 +198,29 @@ var KTModalCustomersAdd = function () {
     };
 
     var buttonCreate = () => {
-        $('[data-bs-target="#create-kas-masuk"]').on('click', function () {
+        $('[data-bs-target="#create-guru"]').on('click', function () {
+            $($(form).find('select[name="jenis_kelamin"]')).val('');
+            $($(form).find('input[name="no_hp"]')).val('');
             $($(form).find('input[name="nama"]')).val('');
-            $(submitButton).data('kas-masuk', '');
+            $($(form).find('textarea[name="alamat"]')).val('');
+            $(submitButton).data('guru', '');
         });
     }
     var buttonEdit = () => {
-        $('#kas_masuk_table').on('click', '.btn-edit', function () {
+        $('#guru_table').on('click', '.btn-edit', function () {
             var target = this;
             $(target).attr("data-kt-indicator", "on");
-            var kas_masuk = $(this).data('kas-masuk');
-            $(submitButton).data('kas-masuk', kas_masuk);
+            var guru = $(this).data('guru');
+            $(submitButton).data('guru', guru);
             $.ajax({
                 type: "POST",
-                url: `/kas-masuk/${kas_masuk}/edit`,
+                url: `/guru/${guru}/edit`,
                 dataType: "JSON",
                 success: function (response) {
+                    $($(form).find('select[name="jenis_kelamin"]')).val(response.jenis_kelamin).trigger('change');
+                    $($(form).find('input[name="no_hp"]')).val(response.no_hp);
                     $($(form).find('input[name="nama"]')).val(response.nama);
+                    $($(form).find('textarea[name="alamat"]')).val(response.alamat);
                     $(target).removeAttr("data-kt-indicator");
                     modal.show();
                 },
@@ -208,12 +238,12 @@ var KTModalCustomersAdd = function () {
                 }
             });
             // Elements
-            modal = new bootstrap.Modal(document.querySelector('#create-kas-masuk'));
+            modal = new bootstrap.Modal(document.querySelector('#create-guru'));
 
-            form = document.querySelector('#create-kas-masuk_form');
-            submitButton = form.querySelector('#create-kas-masuk_submit');
-            cancelButton = form.querySelector('#create-kas-masuk_cancel');
-            closeButton = form.querySelector('#create-kas-masuk_close');
+            form = document.querySelector('#create-guru_form');
+            submitButton = form.querySelector('#create-guru_submit');
+            cancelButton = form.querySelector('#create-guru_cancel');
+            closeButton = form.querySelector('#create-guru_close');
 
             handleForm();
             buttonCreate();

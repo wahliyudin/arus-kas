@@ -4,21 +4,21 @@
     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 
-@section('title', 'Pemasok')
+@section('title', 'Guru')
 
 @section('toolbar')
     <div id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
         <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
                 <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                    Data Pemasok
+                    Data Guru
                 </h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <li class="breadcrumb-item text-muted">Master</li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
-                    <li class="breadcrumb-item text-muted">Pemasok</li>
+                    <li class="breadcrumb-item text-muted">Guru</li>
                 </ul>
             </div>
         </div>
@@ -35,25 +35,15 @@
                         <span class="path2"></span>
                     </i>
                     <input type="text" data-kt-customer-table-filter="search"
-                        class="form-control form-control-solid w-250px ps-13" placeholder="Cari Pemasok" />
+                        class="form-control form-control-solid w-250px ps-13" placeholder="Cari Guru" />
                 </div>
             </div>
 
             <div class="card-toolbar">
                 <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                    <div class="w-150px me-3">
-                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                            data-placeholder="Status" data-kt-ecommerce-order-filter="status">
-                            <option></option>
-                            <option value="all">All</option>
-                            <option value="active">Active</option>
-                            <option value="locked">Locked</option>
-                        </select>
-                    </div>
-
                     <button type="button" class="btn btn-primary ps-4" data-bs-toggle="modal"
-                        data-bs-target="#create-pemasok">
-                        <i class="ki-duotone ki-plus fs-2"></i>Tambah Pemasok
+                        data-bs-target="#create-guru">
+                        <i class="ki-duotone ki-plus fs-2"></i>Tambah Guru
                     </button>
                 </div>
 
@@ -69,16 +59,17 @@
             </div>
         </div>
         <div class="card-body pt-0">
-            <table class="table align-middle table-row-dashed fs-6 gy-5" id="pemasok_table">
+            <table class="table align-middle table-row-dashed fs-6 gy-5" id="guru_table">
                 <thead>
                     <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                         <th class="w-10px pe-2">
                             <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                 <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                    data-kt-check-target="#pemasok_table .form-check-input" value="1" />
+                                    data-kt-check-target="#guru_table .form-check-input" value="1" />
                             </div>
                         </th>
                         <th class="min-w-125px">Nama</th>
+                        <th class="min-w-125px">Jenis Kelamin</th>
                         <th class="min-w-125px">No HP</th>
                         <th class="min-w-125px">Alamat</th>
                         <th class="text-end min-w-70px">Actions</th>
@@ -92,13 +83,13 @@
 @endsection
 
 @push('modal')
-    <div class="modal fade" id="create-pemasok" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="create-guru" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content">
-                <form class="form" action="#" id="create-pemasok_form" data-kt-redirect="../../customers/list.html">
-                    <div class="modal-header" id="create-pemasok_header">
-                        <h2 class="fw-bold">Tambah Pemasok</h2>
-                        <div id="create-pemasok_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                <form class="form" action="#" id="create-guru_form" data-kt-redirect="../../customers/list.html">
+                    <div class="modal-header" id="create-guru_header">
+                        <h2 class="fw-bold">Tambah Guru</h2>
+                        <div id="create-guru_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                             <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                         </div>
                     </div>
@@ -114,15 +105,25 @@
                                 name="no_hp" />
                         </div>
                         <div class="fv-row mb-7">
+                            <label class="required fs-6 fw-semibold mb-2">Jenis Kelamin</label>
+                            <select class="form-select form-select-solid" name="jenis_kelamin" data-control="select2"
+                                data-placeholder="Jenis Kelamin" data-dropdown-parent="#create-guru">
+                                <option></option>
+                                @foreach (\App\Enums\JenisKelamin::cases() as $jenisKelamin)
+                                    <option value="{{ $jenisKelamin->value }}">{{ $jenisKelamin->label() }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="fv-row mb-7">
                             <label class="required fs-6 fw-semibold mb-2">Alamat</label>
                             <textarea class="form-control form-control-solid" placeholder="Alamat" name="alamat"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer flex-center">
-                        <button type="reset" id="create-pemasok_cancel" class="btn btn-light me-3">
+                        <button type="reset" id="create-guru_cancel" class="btn btn-light me-3">
                             Discard
                         </button>
-                        <button type="submit" data-akun="" id="create-pemasok_submit" class="btn btn-primary">
+                        <button type="submit" data-akun="" id="create-guru_submit" class="btn btn-primary">
                             <span class="indicator-label">
                                 Submit
                             </span>
@@ -139,6 +140,6 @@
 
 @push('js')
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/pemasok/index.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/pemasok/create.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/guru/index.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/guru/create.js') }}"></script>
 @endpush
