@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\BukuBesarController;
+use App\Http\Controllers\JurnalUmumController;
 use App\Http\Controllers\KasKeluarController;
 use App\Http\Controllers\KasMasukController;
 use App\Http\Controllers\KlasifikasiController;
+use App\Http\Controllers\NeracaController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Auth;
@@ -69,3 +72,7 @@ Route::get('kas-keluar/create', [KasKeluarController::class, 'create'])->name('k
 Route::post('kas-keluar/store', [KasKeluarController::class, 'store'])->name('kas-keluar.store');
 Route::post('kas-keluar/{kasKeluar}/edit', [KasKeluarController::class, 'edit'])->name('kas-keluar.edit');
 Route::delete('kas-keluar/{kasKeluar}/destroy', [KasKeluarController::class, 'destroy'])->name('kas-keluar.destroy');
+
+Route::get('jurnal-umum', [JurnalUmumController::class, 'index'])->name('jurnal-umum.index');
+Route::get('buku-besar', [BukuBesarController::class, 'index'])->name('buku-besar.index');
+Route::get('neraca', [NeracaController::class, 'index'])->name('neraca.index');

@@ -350,7 +350,7 @@
                 });
             });
 
-            $('select[name="dari"]').change(function(e) {
+            $('select[name="penerima"]').change(function(e) {
                 e.preventDefault();
                 var value = $(this).val();
                 if (value == "{{ \App\Enums\Penerima::SISWA }}") {

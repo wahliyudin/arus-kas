@@ -78,6 +78,6 @@ class KasKeluarController extends Controller
     private function generateNumber()
     {
         $date = now()->format('ymd');
-        return IdGenerator::generate(['table' => 'kas_keluar', 'field' => 'no', 'length' => 11, 'prefix' => "T$date-"]);
+        return IdGenerator::generate(['table' => 'kas_keluar', 'field' => 'no', 'length' => 12, 'prefix' => "KK$date-"]);
     }
 }
