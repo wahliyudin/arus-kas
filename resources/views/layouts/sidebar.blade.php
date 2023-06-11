@@ -101,6 +101,15 @@
                                     <span class="menu-title">Guru</span>
                                 </a>
                             </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('pengguna.index') ? 'active' : '' }}"
+                                    href="{{ route('pengguna.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Pengguna</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">

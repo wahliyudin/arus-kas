@@ -9,6 +9,7 @@ use App\Http\Controllers\KasKeluarController;
 use App\Http\Controllers\KasMasukController;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\PemasokController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('guru/store', [GuruController::class, 'store'])->name('guru.store');
         Route::post('guru/{guru}/edit', [GuruController::class, 'edit'])->name('guru.edit');
         Route::delete('guru/{guru}/destroy', [GuruController::class, 'destroy'])->name('guru.destroy');
+
+        Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');
+        Route::post('pengguna/list', [PenggunaController::class, 'list'])->name('pengguna.list');
+        Route::post('pengguna/store', [PenggunaController::class, 'store'])->name('pengguna.store');
+        Route::post('pengguna/{user}/edit', [PenggunaController::class, 'edit'])->name('pengguna.edit');
+        Route::delete('pengguna/{user}/destroy', [PenggunaController::class, 'destroy'])->name('pengguna.destroy');
 
         Route::get('kas-masuk', [KasMasukController::class, 'index'])->name('kas-masuk.index');
         Route::post('kas-masuk/list', [KasMasukController::class, 'list'])->name('kas-masuk.list');
