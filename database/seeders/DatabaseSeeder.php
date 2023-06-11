@@ -4,12 +4,15 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Enums\Role;
 use App\Models\Akun;
 use App\Models\Guru;
 use App\Models\Klasifikasi;
 use App\Models\Pemasok;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +27,18 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        User::query()->create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make(1234567890),
+            'role' => Role::ADMIN,
+        ]);
+        User::query()->create([
+            'name' => 'kepsek',
+            'email' => 'kepsek@gmail.com',
+            'password' => Hash::make(1234567890),
+            'role' => Role::KEPALA_SEKOLAH,
+        ]);
         Akun::factory(10)->create();
         Pemasok::factory(10)->create();
         Siswa::factory(10)->create();
