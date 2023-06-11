@@ -6,10 +6,10 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Keen - Multi-demo Bootstrap 5 HTML Admin Dashboard Template by Keenthemes</title>
+    <title>{{ env('APP_NAME') }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/logo.png') }}" />
 
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -85,16 +85,16 @@
                 style="background-image: url({{ asset('assets/media/misc/auth-bg.png') }})">
                 <!--begin::Content-->
                 <div class="d-flex flex-column flex-center p-6 p-lg-10 w-100">
-                    <!--begin::Logo-->
+                    {{-- <!--begin::Logo-->
                     <a href="../../../index.html" class="mb-0 mb-lg-20">
                         <img alt="Logo" src="{{ asset('assets/media/logos/default-white.svg') }}"
                             class="h-40px h-lg-50px" />
                     </a>
-                    <!--end::Logo-->
+                    <!--end::Logo--> --}}
 
                     <!--begin::Image-->
-                    <img class="d-none d-lg-block mx-auto w-300px w-lg-75 w-xl-500px mb-10 mb-lg-20"
-                        src="{{ asset('assets/media/misc/auth-screens.png') }}" alt="" />
+                    <img class="d-none d-lg-block mx-auto w-300px w-lg-75 w-xl-300px mb-10 mb-lg-20"
+                        src="{{ asset('assets/logo.png') }}" alt="" />
                     <!--end::Image-->
                 </div>
                 <!--end::Content-->

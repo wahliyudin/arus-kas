@@ -39,147 +39,151 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                    <span class="menu-link">
-                        <span class="menu-icon">
-                            <i class="ki-duotone ki-dropbox fs-2">
-                                <i class="path1"></i>
-                                <i class="path2"></i>
-                                <i class="path3"></i>
-                                <i class="path4"></i>
-                                <i class="path5"></i>
-                            </i>
+                @role(\App\Enums\Role::ADMIN->value)
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-dropbox fs-2">
+                                    <i class="path1"></i>
+                                    <i class="path2"></i>
+                                    <i class="path3"></i>
+                                    <i class="path4"></i>
+                                    <i class="path5"></i>
+                                </i>
+                            </span>
+                            <span class="menu-title">Master</span>
+                            <span class="menu-arrow"></span>
                         </span>
-                        <span class="menu-title">Master</span>
-                        <span class="menu-arrow"></span>
-                    </span>
-                    <div
-                        class="menu-sub menu-sub-accordion {{ request()->routeIs('klasifikasi.index') || request()->routeIs('akun.index') || request()->routeIs('pemasok.index') || request()->routeIs('siswa.index') || request()->routeIs('guru.index') ? 'hover show' : '' }}">
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('klasifikasi.index') ? 'active' : '' }}"
-                                href="{{ route('klasifikasi.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Klasifikasi</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('akun.index') ? 'active' : '' }}"
-                                href="{{ route('akun.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Akun</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('pemasok.index') ? 'active' : '' }}"
-                                href="{{ route('pemasok.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Pemasok</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('siswa.index') ? 'active' : '' }}"
-                                href="{{ route('siswa.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Siswa</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('guru.index') ? 'active' : '' }}"
-                                href="{{ route('guru.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Guru</span>
-                            </a>
+                        <div
+                            class="menu-sub menu-sub-accordion {{ request()->routeIs('klasifikasi.index') || request()->routeIs('akun.index') || request()->routeIs('pemasok.index') || request()->routeIs('siswa.index') || request()->routeIs('guru.index') ? 'hover show' : '' }}">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('klasifikasi.index') ? 'active' : '' }}"
+                                    href="{{ route('klasifikasi.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Klasifikasi</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('akun.index') ? 'active' : '' }}"
+                                    href="{{ route('akun.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Akun</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('pemasok.index') ? 'active' : '' }}"
+                                    href="{{ route('pemasok.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Pemasok</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('siswa.index') ? 'active' : '' }}"
+                                    href="{{ route('siswa.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Siswa</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('guru.index') ? 'active' : '' }}"
+                                    href="{{ route('guru.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Guru</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                    <span class="menu-link">
-                        <span class="menu-icon">
-                            <i class="ki-duotone ki-dollar fs-2">
-                                <i class="path1"></i>
-                                <i class="path2"></i>
-                                <i class="path3"></i>
-                            </i>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-dollar fs-2">
+                                    <i class="path1"></i>
+                                    <i class="path2"></i>
+                                    <i class="path3"></i>
+                                </i>
+                            </span>
+                            <span class="menu-title">Transaksi</span>
+                            <span class="menu-arrow"></span>
                         </span>
-                        <span class="menu-title">Transaksi</span>
-                        <span class="menu-arrow"></span>
-                    </span>
-                    <div
-                        class="menu-sub menu-sub-accordion {{ request()->routeIs('kas-masuk.index') || request()->routeIs('kas-keluar.index') ? 'hover show' : '' }}">
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('kas-masuk.index') ? 'active' : '' }}"
-                                href="{{ route('kas-masuk.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Kas Masuk</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('kas-keluar.index') ? 'active' : '' }}"
-                                href="{{ route('kas-keluar.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Kas Keluar</span>
-                            </a>
+                        <div
+                            class="menu-sub menu-sub-accordion {{ request()->routeIs('kas-masuk.index') || request()->routeIs('kas-keluar.index') ? 'hover show' : '' }}">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('kas-masuk.index') ? 'active' : '' }}"
+                                    href="{{ route('kas-masuk.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kas Masuk</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('kas-keluar.index') ? 'active' : '' }}"
+                                    href="{{ route('kas-keluar.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kas Keluar</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                    <span class="menu-link">
-                        <span class="menu-icon">
-                            <i class="ki-duotone ki-chart-simple-3 fs-2">
-                                <i class="path1"></i>
-                                <i class="path2"></i>
-                                <i class="path3"></i>
-                                <i class="path4"></i>
-                            </i>
+                @endrole
+                @role(\App\Enums\Role::KEPALA_SEKOLAH->value . '|' . \App\Enums\Role::ADMIN->value)
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-chart-simple-3 fs-2">
+                                    <i class="path1"></i>
+                                    <i class="path2"></i>
+                                    <i class="path3"></i>
+                                    <i class="path4"></i>
+                                </i>
+                            </span>
+                            <span class="menu-title">Laporan</span>
+                            <span class="menu-arrow"></span>
                         </span>
-                        <span class="menu-title">Laporan</span>
-                        <span class="menu-arrow"></span>
-                    </span>
-                    <div
-                        class="menu-sub menu-sub-accordion {{ request()->routeIs('buku-besar.index') || request()->routeIs('jurnal-umum.index') || request()->routeIs('arus-kas.index') ? 'hover show' : '' }}">
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('arus-kas.index') ? 'active' : '' }}"
-                                href="{{ route('arus-kas.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Arus Kas</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('jurnal-umum.index') ? 'active' : '' }}"
-                                href="{{ route('jurnal-umum.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Jurnal Umum</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link {{ request()->routeIs('buku-besar.index') ? 'active' : '' }}"
-                                href="{{ route('buku-besar.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Buku Besar</span>
-                            </a>
+                        <div
+                            class="menu-sub menu-sub-accordion {{ request()->routeIs('buku-besar.index') || request()->routeIs('jurnal-umum.index') || request()->routeIs('arus-kas.index') ? 'hover show' : '' }}">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('arus-kas.index') ? 'active' : '' }}"
+                                    href="{{ route('arus-kas.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Arus Kas</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('jurnal-umum.index') ? 'active' : '' }}"
+                                    href="{{ route('jurnal-umum.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Jurnal Umum</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('buku-besar.index') ? 'active' : '' }}"
+                                    href="{{ route('buku-besar.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Buku Besar</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endrole
             </div>
         </div>
     </div>
