@@ -104,5 +104,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('arus-kas', [ArusKasController::class, 'index'])->name('arus-kas.index');
         Route::post('arus-kas/datatable', [ArusKasController::class, 'datatable'])->name('arus-kas.datatable');
         Route::post('arus-kas/export', [ArusKasController::class, 'export'])->name('arus-kas.export');
+        Route::post('arus-kas/excel', [ArusKasController::class, 'excel'])->name('arus-kas.excel');
     });
 });
