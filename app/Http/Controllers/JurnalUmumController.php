@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\JurnalUmumExport;
 use App\Models\Jurnal;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class JurnalUmumController extends Controller
@@ -22,6 +24,20 @@ class JurnalUmumController extends Controller
         $endDate = isset($range[1]) && $range[1] != '' ? Carbon::createFromFormat('m/d/Y', $range[1]) : null;
         return DataTables::collection($this->generate($startDate, $endDate))
             ->make();
+    }
+
+    public function excel(Request $request)
+    {
+        $range = str($request->get('range'))->explode(' - ');
+        $startDate = isset($range[0]) && $range[0] != '' ? Carbon::createFromFormat('m/d/Y', $range[0]) : null;
+        $endDate = isset($range[1]) && $range[1] != '' ? Carbon::createFromFormat('m/d/Y', $range[1]) : null;
+        if ($startDate == null && $endDate == null) {
+            return response()->json([
+                'message' => 'Anda belum memilih tanggal'
+            ], 422);
+        }
+        $jurnals = $this->generate($startDate, $endDate);
+        return Excel::download(new JurnalUmumExport($jurnals), 'jurnal-umu.xlsx');
     }
 
     public function export(Request $request)

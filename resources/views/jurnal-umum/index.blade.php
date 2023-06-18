@@ -45,6 +45,11 @@
                         value="{{ now()->format('m/d/Y') . ' - ' . now()->format('m/d/Y') }}" name="range"
                         id="range" />
                     <button type="button" class="btn btn-info export btn-sm">Export</button>
+                    <button type="button" class="btn btn-secondary excel btn-sm ms-4 d-flex ps-4">
+                        <i class="ki-duotone ki-file-down fs-4">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                        </i><span>Excel</span></button>
                 </div>
             </div>
         </div>
@@ -156,6 +161,46 @@
                         var url = window.URL.createObjectURL(data);
                         a.href = url;
                         a.download = 'jurnal-umum.pdf';
+                        document.body.append(a);
+                        a.click();
+                        a.remove();
+                        window.URL.revokeObjectURL(url);
+                    },
+                    error: function(jqXHR, xhr, textStatus, errorThrow, exception) {
+                        if (jqXHR.status == 500) {
+                            Swal.fire(
+                                'Error!',
+                                'Something went wrong',
+                                'error'
+                            );
+                        }
+                        if (jqXHR.status == 422) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Peringatan!',
+                                text: JSON.parse(jqXHR.responseText).message,
+                            })
+                        }
+                    }
+                });
+            });
+
+            $('.excel').click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/jurnal-umum/excel",
+                    data: {
+                        range: $('input[name="range"]').val()
+                    },
+                    xhrFields: {
+                        responseType: 'blob'
+                    },
+                    success: function(data) {
+                        var a = document.createElement('a');
+                        var url = window.URL.createObjectURL(data);
+                        a.href = url;
+                        a.download = 'jurnal-umum.xlsx';
                         document.body.append(a);
                         a.click();
                         a.remove();

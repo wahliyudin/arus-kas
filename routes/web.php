@@ -100,6 +100,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('jurnal-umum', [JurnalUmumController::class, 'index'])->name('jurnal-umum.index');
         Route::post('jurnal-umum/datatable', [JurnalUmumController::class, 'datatable'])->name('jurnal-umum.datatable');
         Route::post('jurnal-umum/export', [JurnalUmumController::class, 'export'])->name('jurnal-umum.export');
+        Route::post('jurnal-umum/excel', [JurnalUmumController::class, 'excel'])->name('jurnal-umum.excel');
 
         Route::get('arus-kas', [ArusKasController::class, 'index'])->name('arus-kas.index');
         Route::post('arus-kas/datatable', [ArusKasController::class, 'datatable'])->name('arus-kas.datatable');
