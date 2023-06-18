@@ -96,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('buku-besar', [BukuBesarController::class, 'index'])->name('buku-besar.index');
         Route::post('buku-besar/datatable', [BukuBesarController::class, 'datatable'])->name('buku-besar.datatable');
         Route::post('buku-besar/export', [BukuBesarController::class, 'export'])->name('buku-besar.export');
+        Route::post('buku-besar/excel', [BukuBesarController::class, 'excel'])->name('buku-besar.excel');
 
         Route::get('jurnal-umum', [JurnalUmumController::class, 'index'])->name('jurnal-umum.index');
         Route::post('jurnal-umum/datatable', [JurnalUmumController::class, 'datatable'])->name('jurnal-umum.datatable');
