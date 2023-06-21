@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kas_keluar', function (Blueprint $table) {
-            $table->string('kode')->primary();
-            $table->string('kode_akun');
-            $table->string('kode_jurnal');
-            $table->unsignedBigInteger('siswa_id')->nullable();
-            $table->unsignedBigInteger('pemasok_id')->nullable();
-            $table->unsignedBigInteger('guru_id')->nullable();
+            $table->string('kode', 6)->primary();
+            $table->string('kode_akun', 11);
+            $table->string('kode_jurnal', 11);
+            $table->integer('siswa_id')->nullable();
+            $table->integer('pemasok_id')->nullable();
+            $table->integer('guru_id')->nullable();
             $table->enum('penerima', [1, 2, 3]);
             $table->date('tanggal');
-            $table->string('keterangan');
+            $table->string('keterangan', 30);
             $table->timestamps();
         });
     }

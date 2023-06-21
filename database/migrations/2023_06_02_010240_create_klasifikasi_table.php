@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('klasifikasi', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
+            $table->integerIncrements('id')->primary();
+            $table->string('nama', 25);
             $table->timestamps();
         });
     }

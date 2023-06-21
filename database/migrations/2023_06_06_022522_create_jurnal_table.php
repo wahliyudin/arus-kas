@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('jurnal', function (Blueprint $table) {
-            $table->string('kode')->primary();
+            $table->string('kode', 11)->primary();
             $table->date('tanggal');
-            $table->string('keterangan');
+            $table->string('keterangan', 30);
             $table->timestamps();
         });
     }

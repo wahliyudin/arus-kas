@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('akun', function (Blueprint $table) {
-            $table->id();
-            $table->string('kode');
-            $table->string('nama');
+            $table->integerIncrements('id')->primary();
+            $table->string('kode', 14);
+            $table->string('nama', 25);
             $table->enum('jenis_akun', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
             $table->timestamps();
         });
