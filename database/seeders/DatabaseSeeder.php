@@ -39,10 +39,10 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make(1234567890),
             'role' => Role::KEPALA_SEKOLAH,
         ]);
-        Akun::factory(10)->create();
-        Pemasok::factory(10)->create();
-        Siswa::factory(10)->create();
-        Klasifikasi::factory(10)->create();
-        Guru::factory(10)->create();
+        // Akun::factory(10)->create();
+        // Pemasok::factory(10)->create();
+        // Siswa::factory(10)->create();
+        // Klasifikasi::factory(10)->create();
+        // Guru::factory(10)->create();
     }
 }
