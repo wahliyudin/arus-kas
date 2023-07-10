@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\SiswaImport;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class SiswaController extends Controller
@@ -61,6 +63,18 @@ class SiswaController extends Controller
             $siswa->delete();
             return response()->json([
                 'message' => 'Berhasil dihapus'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            Excel::import(new SiswaImport, $request->file('file'));
+            return response()->json([
+                'message' => 'Berhasil diimport'
             ]);
         } catch (\Throwable $th) {
             throw $th;
