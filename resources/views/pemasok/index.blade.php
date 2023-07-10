@@ -41,16 +41,13 @@
 
             <div class="card-toolbar">
                 <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                    <div class="w-150px me-3">
-                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                            data-placeholder="Status" data-kt-ecommerce-order-filter="status">
-                            <option></option>
-                            <option value="all">All</option>
-                            <option value="active">Active</option>
-                            <option value="locked">Locked</option>
-                        </select>
-                    </div>
-
+                    <button type="button" class="btn btn-primary ps-4 me-4" data-bs-toggle="modal"
+                        data-bs-target="#import">
+                        <i class="ki-duotone ki-file-up fs-2">
+                            <i class="path1"></i>
+                            <i class="path2"></i>
+                        </i>Import
+                    </button>
                     <button type="button" class="btn btn-primary ps-4" data-bs-toggle="modal"
                         data-bs-target="#create-pemasok">
                         <i class="ki-duotone ki-plus fs-2"></i>Tambah Pemasok
@@ -123,6 +120,40 @@
                             Discard
                         </button>
                         <button type="submit" data-akun="" id="create-pemasok_submit" class="btn btn-primary">
+                            <span class="indicator-label">
+                                Submit
+                            </span>
+                            <span class="indicator-progress">
+                                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+            <div class="modal-content">
+                <form class="form" action="#" id="import_form">
+                    <div class="modal-header" id="import_header">
+                        <h2 class="fw-bold">Import Pemasok</h2>
+                        <div id="import_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+                                    class="path2"></span></i>
+                        </div>
+                    </div>
+                    <div class="modal-body py-10 px-lg-17">
+                        <div class="fv-row mb-7">
+                            <label class="required fs-6 fw-semibold mb-2">File Excel</label>
+                            <input type="file" class="form-control form-control-solid" name="file" />
+                        </div>
+                    </div>
+                    <div class="modal-footer flex-center">
+                        <button type="reset" id="import_cancel" class="btn btn-light me-3">
+                            Discard
+                        </button>
+                        <button type="button" id="import_submit" class="btn btn-primary">
                             <span class="indicator-label">
                                 Submit
                             </span>

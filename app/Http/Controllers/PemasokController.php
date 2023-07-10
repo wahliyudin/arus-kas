@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\PemasokImport;
 use App\Models\Pemasok;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class PemasokController extends Controller
@@ -60,6 +62,18 @@ class PemasokController extends Controller
             $pemasok->delete();
             return response()->json([
                 'message' => 'Berhasil dihapus'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            Excel::import(new PemasokImport, $request->file('file'));
+            return response()->json([
+                'message' => 'Berhasil diimport'
             ]);
         } catch (\Throwable $th) {
             throw $th;

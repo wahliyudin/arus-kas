@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('pemasok/store', [PemasokController::class, 'store'])->name('pemasok.store');
         Route::post('pemasok/{pemasok}/edit', [PemasokController::class, 'edit'])->name('pemasok.edit');
         Route::delete('pemasok/{pemasok}/destroy', [PemasokController::class, 'destroy'])->name('pemasok.destroy');
+        Route::post('pemasok/import', [PemasokController::class, 'import'])->name('pemasok.import');
 
         Route::get('siswa', [SiswaController::class, 'index'])->name('siswa.index');
         Route::post('siswa/list', [SiswaController::class, 'list'])->name('siswa.list');
