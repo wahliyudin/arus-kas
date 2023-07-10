@@ -14,4 +14,15 @@ enum JenisKelamin: string
             self::PEREMPUAN => 'Perempuan',
         };
     }
+
+    public static function jenisKelamin($val)
+    {
+        $val = str($val)->lower()->remove('-')->remove(' ')->value();
+        foreach (static::cases() as $case) {
+            if ($val == str($case->label())->lower()->trim()->remove('-')->remove(' ')->value()) {
+                return $case;
+            }
+        }
+        return null;
+    }
 }

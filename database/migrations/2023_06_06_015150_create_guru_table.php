@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('guru', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->string('nama', 25);
+            $table->string('nama', 50);
             $table->string('no_hp', 13);
-            $table->string('alamat', 30);
+            $table->string('alamat', 100);
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->timestamps();
         });

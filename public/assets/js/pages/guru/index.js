@@ -333,6 +333,48 @@ var KTCustomersList = function () {
         });
     }
 
+    var initImport = () => {
+        $('#import_submit').click(function (e) {
+            e.preventDefault();
+            var postData = new FormData($(`#import_form`)[0]);
+            $(`#import_submit`).attr("data-kt-indicator", "on");
+            $.ajax({
+                type: 'POST',
+                url: "/guru/import",
+                processData: false,
+                contentType: false,
+                data: postData,
+                success: function (response) {
+                    $(`#import_submit`).removeAttr("data-kt-indicator");
+                    Swal.fire(
+                        'Success!',
+                        response.message,
+                        'success'
+                    ).then(function () {
+                        location.reload();
+                    });
+                },
+                error: function (jqXHR, xhr, textStatus, errorThrow, exception) {
+                    $(`#import_submit`).removeAttr("data-kt-indicator");
+                    if (jqXHR.status == 422) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Peringatan!',
+                            text: JSON.parse(jqXHR.responseText)
+                                .message,
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: jqXHR.responseText,
+                        })
+                    }
+                }
+            });
+        });
+    }
+
     // Public methods
     return {
         init: function () {
@@ -348,6 +390,7 @@ var KTCustomersList = function () {
             handleDeleteRows();
             handleDeleteRow();
             handleStatusFilter();
+            initImport();
         }
     }
 }();

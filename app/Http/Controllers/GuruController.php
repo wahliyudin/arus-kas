@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\GuruImport;
 use App\Models\Guru;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class GuruController extends Controller
@@ -64,6 +66,18 @@ class GuruController extends Controller
             $guru->delete();
             return response()->json([
                 'message' => 'Berhasil dihapus'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            Excel::import(new GuruImport, $request->file('file'));
+            return response()->json([
+                'message' => 'Berhasil diimport'
             ]);
         } catch (\Throwable $th) {
             throw $th;
