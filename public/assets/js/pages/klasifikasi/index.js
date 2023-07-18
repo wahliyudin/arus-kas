@@ -310,6 +310,53 @@ var KTCustomersList = function () {
         });
     }
 
+    var formImport = () => {
+        $('#import-klasifikasi_submit').click(function (e) {
+            e.preventDefault();
+            var submitBtn = $('#import-klasifikasi_submit');
+            var postData = new FormData($(`#import-klasifikasi_form`)[0]);
+            submitBtn.attr("data-kt-indicator", "on");
+            $.ajax({
+                type: 'POST',
+                url: "/klasifikasi/import",
+                processData: false,
+                contentType: false,
+                data: postData,
+                success: function (response) {
+                    submitBtn.removeAttr('data-kt-indicator');
+                    Swal.fire({
+                        text: "Form has been successfully submitted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    }).then(function (result) {
+                        datatable.ajax.reload();
+                        $('#import-klasifikasi').modal('hide');
+                    });
+                },
+                error: function (jqXHR) {
+                    $(submitBtn).removeAttr("data-kt-indicator");
+                    submitBtn.disabled = false;
+                    if (jqXHR.status == 422 || jqXHR.responseJSON.message.includes("404")) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Peringatan!',
+                            text: JSON.parse(jqXHR.responseText).message,
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: jqXHR.responseText,
+                        })
+                    }
+                }
+            });
+        });
+    }
     // Public methods
     return {
         init: function () {
@@ -324,6 +371,7 @@ var KTCustomersList = function () {
             handleSearchDatatable();
             handleDeleteRows();
             handleDeleteRow();
+            formImport();
         }
     }
 }();

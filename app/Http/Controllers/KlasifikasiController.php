@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\KlasifikasiImport;
 use App\Models\Klasifikasi;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class KlasifikasiController extends Controller
@@ -59,6 +61,18 @@ class KlasifikasiController extends Controller
             return response()->json([
                 'message' => 'Berhasil dihapus'
             ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            $request->validate([
+                'file' => ['required', 'file']
+            ]);
+            Excel::import(new KlasifikasiImport, $request->file('file'));
         } catch (\Throwable $th) {
             throw $th;
         }

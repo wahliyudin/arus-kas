@@ -201,7 +201,7 @@
             <div class="modal-content">
                 <form class="form" action="#" id="import-akun_form">
                     <div class="modal-header" id="import-akun_header">
-                        <h2 class="fw-bold">Tambah Akun</h2>
+                        <h2 class="fw-bold">Import Akun</h2>
                         <div id="import-akun_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                             <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
                                     class="path2"></span></i>

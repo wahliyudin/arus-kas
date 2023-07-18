@@ -42,6 +42,11 @@
             <div class="card-toolbar">
                 <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
 
+                    <button type="button" class="btn btn-info ps-4 me-3" data-bs-toggle="modal"
+                        data-bs-target="#import-klasifikasi">
+                        <i class="ki-duotone ki-plus fs-2"></i>Import Klasifikasi
+                    </button>
+
                     <button type="button" class="btn btn-primary ps-4" data-bs-toggle="modal"
                         data-bs-target="#create-klasifikasi">
                         <i class="ki-duotone ki-plus fs-2"></i>Tambah Klasifikasi
@@ -103,6 +108,39 @@
                             Discard
                         </button>
                         <button type="submit" data-akun="" id="create-klasifikasi_submit" class="btn btn-primary">
+                            <span class="indicator-label">
+                                Submit
+                            </span>
+                            <span class="indicator-progress">
+                                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="import-klasifikasi" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-top">
+            <div class="modal-content">
+                <form class="form" action="#" id="import-klasifikasi_form">
+                    <div class="modal-header" id="import-klasifikasi_header">
+                        <h2 class="fw-bold">Import Klasifikasi</h2>
+                        <div id="import-klasifikasi_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+                                    class="path2"></span></i>
+                        </div>
+                    </div>
+                    <div class="modal-body py-10 px-lg-17">
+                        <form action="" id="import-klasifikasi_form">
+                            <input type="file" name="file" class="form-control">
+                        </form>
+                    </div>
+                    <div class="modal-footer flex-center">
+                        <button type="reset" id="import-klasifikasi_cancel" class="btn btn-light me-3">
+                            Discard
+                        </button>
+                        <button type="submit" id="import-klasifikasi_submit" class="btn btn-primary">
                             <span class="indicator-label">
                                 Submit
                             </span>

@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('klasifikasi/store', [KlasifikasiController::class, 'store'])->name('klasifikasi.store');
         Route::post('klasifikasi/{klasifikasi}/edit', [KlasifikasiController::class, 'edit'])->name('klasifikasi.edit');
         Route::delete('klasifikasi/{klasifikasi}/destroy', [KlasifikasiController::class, 'destroy'])->name('klasifikasi.destroy');
+        Route::post('klasifikasi/import', [KlasifikasiController::class, 'import'])->name('klasifikasi.import');
 
         Route::get('akun', [AkunController::class, 'index'])->name('akun.index');
         Route::post('akun/list', [AkunController::class, 'list'])->name('akun.list');
