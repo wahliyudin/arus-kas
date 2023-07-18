@@ -41,7 +41,7 @@
 
             <div class="card-toolbar">
                 <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                    <div class="w-150px me-3">
+                    {{-- <div class="w-150px me-3">
                         <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                             data-placeholder="Status" data-kt-ecommerce-order-filter="status">
                             <option></option>
@@ -49,7 +49,13 @@
                             <option value="active">Active</option>
                             <option value="locked">Locked</option>
                         </select>
-                    </div>
+                    </div> --}}
+                    <a href="{{ route('akun.template') }}" class="btn btn-secondary me-3">Download Template</a>
+
+                    <button type="button" class="btn btn-info ps-4 me-3" data-bs-toggle="modal"
+                        data-bs-target="#import-akun">
+                        <i class="ki-duotone ki-plus fs-2"></i>Import Akun
+                    </button>
 
                     <button type="button" class="btn btn-primary ps-4" data-bs-toggle="modal"
                         data-bs-target="#create-akun">
@@ -178,6 +184,39 @@
                             Discard
                         </button>
                         <button type="submit" data-akun="" id="create-akun_submit" class="btn btn-primary">
+                            <span class="indicator-label">
+                                Submit
+                            </span>
+                            <span class="indicator-progress">
+                                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="import-akun" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-top">
+            <div class="modal-content">
+                <form class="form" action="#" id="import-akun_form">
+                    <div class="modal-header" id="import-akun_header">
+                        <h2 class="fw-bold">Tambah Akun</h2>
+                        <div id="import-akun_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                            <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span
+                                    class="path2"></span></i>
+                        </div>
+                    </div>
+                    <div class="modal-body py-10 px-lg-17">
+                        <form action="" id="import-akun_form">
+                            <input type="file" name="file" class="form-control">
+                        </form>
+                    </div>
+                    <div class="modal-footer flex-center">
+                        <button type="reset" id="import-akun_cancel" class="btn btn-light me-3">
+                            Discard
+                        </button>
+                        <button type="submit" data-akun="" id="import-akun_submit" class="btn btn-primary">
                             <span class="indicator-label">
                                 Submit
                             </span>

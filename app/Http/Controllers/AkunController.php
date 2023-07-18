@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Enums\JenisAkun;
+use App\Imports\AkunImport;
 use App\Models\Akun;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class AkunController extends Controller
 {
@@ -103,5 +110,82 @@ class AkunController extends Controller
             $currentKode = 1;
         }
         return (string)$jenisAkun->kode() . $currentKode;
+    }
+
+    public function template()
+    {
+        $spreadsheet = new Spreadsheet();
+        $akun = $spreadsheet->getActiveSheet();
+        $master = $spreadsheet->addSheet(new Worksheet($spreadsheet));
+
+        $master->setTitle('master');
+        $akun->setTitle('akun');
+
+        $titles = [
+            'Nama',
+            'Jenis Akun',
+        ];
+        $h = 'A';
+        foreach ($titles as $i => $val) {
+            $akun->setCellValue($h . '1', $val);
+            $h = $this->incrementLetter($h);
+        }
+
+        $columnIterator = $akun->getColumnIterator();
+        foreach ($columnIterator as $column) {
+            $dimension = $akun->getColumnDimension($column->getColumnIndex());
+            $dimension->setWidth(20);
+        }
+
+        $master->getStyle('A1:B1')
+            ->getFont()
+            ->setBold(true);
+        $akun->getStyle('A1:B1')
+            ->getFont()
+            ->setBold(true);
+
+
+        $master->setCellValue('A1', 'Jenis Akun');
+        $master->getColumnDimension('A')->setAutoSize(true);
+        $data = collect(JenisAkun::cases())->pluck('name')->toArray();
+        $dropdownRange = '$A$2:$A$' . (count($data) + 2);
+        foreach ($data as $index => $item) {
+            $cell = 'A' . ($index + 2);
+            $master->setCellValue($cell, $item);
+        }
+        $dataValidation = $akun->getCell('B2')->getDataValidation();
+        $dataValidation->setType(DataValidation::TYPE_LIST)
+            ->setAllowBlank(true)
+            ->setShowDropDown(true)
+            ->setFormula1('=master!' . $dropdownRange);
+        $akun->setDataValidation('B2:B10', $dataValidation);
+        $master->setSheetState('hidden');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('assets/template/akun.xlsx');
+        return response()->download('assets/template/akun.xlsx');
+    }
+
+    public function incrementLetter($letter)
+    {
+        $ascii = ord($letter);
+        $ascii++;
+        $newLetter = chr($ascii);
+        return $newLetter;
+    }
+
+    public function import(Request $request)
+    {
+        try {
+            $request->validate([
+                'file' => ['required', 'file']
+            ]);
+            Excel::import(new AkunImport(), $request->file('file'));
+            return response()->json([
+                'message' => 'Berhasil diimport'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

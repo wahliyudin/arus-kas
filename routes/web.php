@@ -50,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('akun/{value}/get-number', [AkunController::class, 'getNumber'])->name('akun.get-number');
         Route::post('akun/{akun}/edit', [AkunController::class, 'edit'])->name('akun.edit');
         Route::delete('akun/{akun}/destroy', [AkunController::class, 'destroy'])->name('akun.destroy');
+        Route::get('akun/template', [AkunController::class, 'template'])->name('akun.template');
+        Route::post('akun/import', [AkunController::class, 'import'])->name('akun.import');
 
         Route::get('pemasok', [PemasokController::class, 'index'])->name('pemasok.index');
         Route::post('pemasok/list', [PemasokController::class, 'list'])->name('pemasok.list');

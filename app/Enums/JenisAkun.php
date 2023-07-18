@@ -46,4 +46,20 @@ enum JenisAkun: int
             self::BEBAN => 50,
         };
     }
+
+    public static function get($val)
+    {
+        return match ($val) {
+            self::AKTIVA_LANCAR->name => self::AKTIVA_LANCAR,
+            self::INVESTASI_JANGKA_PANJANG->name => self::INVESTASI_JANGKA_PANJANG,
+            self::AKTIVA_TETAP->name => self::AKTIVA_TETAP,
+            self::AKTIVA_TETAP_TIDAK_BERWUJUD->name => self::AKTIVA_TETAP_TIDAK_BERWUJUD,
+            self::AKTIVA_LAIN_LAIN->name => self::AKTIVA_LAIN_LAIN,
+            self::KEWAJIBAN->name => self::KEWAJIBAN,
+            self::KEWAJIBAN_JANGKA_PANJANG->name => self::KEWAJIBAN_JANGKA_PANJANG,
+            self::EKUITAS->name => self::EKUITAS,
+            self::PENDAPATAN->name => self::PENDAPATAN,
+            self::BEBAN->name => self::BEBAN,
+        };
+    }
 }
